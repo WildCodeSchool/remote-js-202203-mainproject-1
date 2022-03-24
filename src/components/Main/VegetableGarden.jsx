@@ -1,10 +1,7 @@
-
-import React from 'react';
-
 const VegetableGarden = () => {
   return (
     <div>
-            
+          <h1>Mon potager</h1>  
     </div>
   );
 };
