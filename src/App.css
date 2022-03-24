@@ -23,13 +23,17 @@ section#home {
   align-items:center;
 }
 
+section#home img {
+  max-width:600px;
+}
+
 /***************** Header ***********************/
 header{
   height:100px;
   background-color:rgb(119, 155, 66);
   padding:5px;
 }
-header,ul{
+header,header ul, footer ul{
   display:flex;
   flex-direction:row;
   justify-content:space-around;
@@ -43,12 +47,14 @@ header .nav{
 }
 header li{
   list-style-type:none;
-  background:rgb(12, 61, 12);
+ 
+  /*background:rgb(40, 141, 40);*/
+  background: linear-gradient(to bottom right, rgb(12, 61, 12), rgb(40, 141, 40));
   color:#bbb;
   font-weight: bold;
   margin: 5px;
   padding:10px;
-  width:70px;
+  /*width:100px;*/
   border-radius:10px;
 }
 header li:hover{
@@ -56,7 +62,9 @@ header li:hover{
   transform: scale(1.1);
   transition:all 0.25s ease-in-out;
 }
-
+header Link{
+ text-decoration: none;
+}
 /***************** footer ***********************/
 
 footer {
@@ -79,34 +87,3 @@ footer li {
   list-style-type:none;
 }
 
-
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
