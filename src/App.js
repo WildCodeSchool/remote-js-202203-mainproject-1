@@ -6,7 +6,7 @@ import Footer from './components/LayoutApp/Footer';
 import Home from './components/LayoutApp/Home';
 import VegetableGarden from './components/Main/VegetableGarden';
 import VegetablesList from './components/Main/VegetablesList';
-
+import Vegetable from './components/Main/Vegetable';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -31,6 +31,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/vegetables-list" element={<VegetablesList vegetablesList={vegetablesList} />} />
             <Route path="/vegetable-garden" element={<VegetableGarden />} />
+            <Route path="/vegetable" element={<Vegetable />} />
           </Routes>
         </div>
       </Router>
