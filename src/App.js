@@ -5,7 +5,7 @@ import Header from "./components/LayoutApp/Header";
 import Footer from "./components/LayoutApp/Footer";
 import Home from "./components/LayoutApp/Home";
 import VegetableGarden from "./components/Main/VegetableGarden";
-import VegetablesList from "./components/Main/VegetablesList";
+import MainVegetables from "./components/Main/MainVegetables";
 import Vegetable from "./components/Main/Vegetable";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Axios from "axios";
@@ -18,7 +18,6 @@ function App() {
     Axios.get("https://potager-compatible-api.herokuapp.com/api/vegetables")
       .then((response) => response.data)
       .then((data) => {
-        console.log(data);
         setVegetablesList(data);
       });
   }, []);
@@ -31,10 +30,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route
               path="/vegetables-list"
-              element={<VegetablesList vegetablesList={vegetablesList} />}
+              element={<MainVegetables vegetablesList={vegetablesList} />}
             />
             <Route path="/vegetable-garden" element={<VegetableGarden />} />
-            <Route path="/vegetable" element={<Vegetable />} />
           </Routes>
         </div>
       </Router>

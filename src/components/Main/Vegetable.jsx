@@ -1,7 +1,8 @@
 import { RiCloseLine } from "react-icons/ri";
 import aubergine from "../../media/aubergine.jpg";
 
-const Vegetable = ({ handleModal, vegetable }) => {
+const Vegetable = ({ handleModal, vegetable, limitsList }) => {
+  console.log(limitsList);
   return (
     <>
       <div className="darkBG" onClick={() => handleModal} />
@@ -10,7 +11,7 @@ const Vegetable = ({ handleModal, vegetable }) => {
           <div className="modalHeader">
             <h5 className="heading">{vegetable.name}</h5>
           </div>
-          <button className="closeBtn" onClick={handleModal}>
+          <button className="closeBtn" onClick={() => handleModal(-1)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
           <div className="modal-card-vegetable">
@@ -41,8 +42,27 @@ const Vegetable = ({ handleModal, vegetable }) => {
           </div>
           <div className="modalActions">
             <div className="actionsContainer">
-              <button className="previousBtn">précédent</button>
-              <button className="nextBtn">suivant</button>
+              {vegetable.id > 1 ? (
+                <button
+                  className="previousBtn"
+                  onClick={() => handleModal(vegetable.id - 1)}
+                >
+                  précédent
+                </button>
+              ) : (
+                ""
+              )}
+
+              {vegetable.id < limitsList ? (
+                <button
+                  className="nextBtn"
+                  onClick={() => handleModal(vegetable.id + 1)}
+                >
+                  suivant
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
