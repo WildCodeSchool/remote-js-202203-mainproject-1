@@ -238,3 +238,21 @@ footer li {
   width: 100px;
   border-radius: 10px;
 }
+
+
+/***************** garden ***********************/
+div[id="garden"] {
+  width:1200px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+}
+div[id="garden"] div.cell {
+  height:290px;
+width:290px;
+margin-top:20px;
+border:1px black solid;
+}
+div[id="garden"] div.cell:hover {
+  cursor: pointer;
+}
