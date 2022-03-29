@@ -14,7 +14,7 @@ const MainVegetables = ({ vegetablesList }) => {
       ? (setOpenModal(false), setVegetable([]))
       : (setOpenModal(true),
         setVegetable(
-          vegetablesList.filter((vegetable) => vegetable.id === vegetableId)[0]
+          vegetablesList.find((vegetable) => vegetable.id === vegetableId)
         ));
   };
 
