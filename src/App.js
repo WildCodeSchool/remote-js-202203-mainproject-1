@@ -4,9 +4,8 @@ import "./App.css";
 import Header from "./components/LayoutApp/Header";
 import Footer from "./components/LayoutApp/Footer";
 import Home from "./components/LayoutApp/Home";
-import VegetableGarden from "./components/Main/VegetableGarden";
-import MainVegetables from "./components/Main/MainVegetables";
-import Vegetable from "./components/Main/Vegetable";
+import MainVegetableGarden from "./components/MainGarden/MainVegetableGarden";
+import MainVegetables from "./components/MainVegetableList/MainVegetables";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -32,7 +31,7 @@ function App() {
               path="/vegetables-list"
               element={<MainVegetables vegetablesList={vegetablesList} />}
             />
-            <Route path="/vegetable-garden" element={<VegetableGarden />} />
+            <Route path="/vegetable-garden" element={<MainVegetableGarden vegetablesList={vegetablesList} />} />
           </Routes>
         </div>
       </Router>

@@ -29,7 +29,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal }) => {
     // indice de fin, le dernier élément n'est pas pris en compte
     const lastMarker = page * vegetablesPerPage;
     setVegetablesPaged(vegetablesList.slice(firstMarker, lastMarker));
-  }, [page]);
+  }, [page,vegetablesList]);
 
   return (
     <div>

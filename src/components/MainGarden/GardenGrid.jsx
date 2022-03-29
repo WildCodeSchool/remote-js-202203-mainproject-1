@@ -1,6 +1,6 @@
 
 
-const GuardenGrid = () => {
+const GardenGrid = () => {
   return (
     <div>
             
@@ -8,4 +8,4 @@ const GuardenGrid = () => {
   );
 };
 
-export default GuardenGrid;
+export default GardenGrid;
