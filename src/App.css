@@ -241,6 +241,10 @@ footer li {
 
 
 /***************** garden ***********************/
+.garden{
+  display:flex;
+  justify-content:space-around;
+}
 div[id="garden"] {
   width:1200px;
   display:flex;
@@ -253,6 +257,23 @@ width:290px;
 margin-top:20px;
 border:1px black solid;
 }
-div[id="garden"] div.cell:hover {
+div[id="garden"] div.cell button:hover {
   cursor: pointer;
+}
+
+div[id="compatible-vegetable"] {
+  background-color: green;
+  padding:10px;
+  text-align:left;
+  color:#fff;
+}
+div[id="incompatible-vegetable"] {
+  background-color: red;
+  padding:10px;
+  text-align:left;
+  color:#fff;
+}
+
+ul {
+  list-style-type: none;
 }
