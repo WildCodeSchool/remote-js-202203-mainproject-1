@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import {  useNavigate } from "react-router-dom"; 
 import GardenGrid from "./GardenGrid";
-import DisplayCompatibility from "./DisplayCompatibility";
-import DisplayIncompatibility from "./DisplayIncompatibility";
 import { boxLeft, boxRight, boxPreviousColumnLeft, boxPreviousColumn, boxPreviousColumnRight, boxNextColumnLeft, boxNextColumn, boxNextColumnRight } from "./selectCellFunctions";
+import GardenContext from "../../components/Context/GardenContext";
+import IndexGardenContext from "../../components/Context/IndexGardenContext";
+import { columns, rows } from "../../App";
+import CompatibleContext from "../../components/Context/CompatibleContext";
+import IncompatibleContext from "../../components/Context/IncompatibleContext";
 
-export const columns = 4;
-export const rows = 4;
 const MainVegetableGarden = ({ vegetablesList }) => {
+  let navigate = useNavigate();
 
-  // const initialGarden = new Array(columns * rows).fill(-1);
-  const initialGarden = [2, 4, -1, 8, 10, -1, 12, 14, -1, 16, 18, -1, 20, 22, 26, 28];
-  const [garden, setGarden] = useState(initialGarden);
+  const { garden } = useContext(GardenContext);
+  const { indexGarden, setIndexGarden } = useContext(IndexGardenContext);
   const [selectedCase, setSelectedCase] = useState([]);
 
-  const [compatibleVegetables, setCompatibleVegetables] = useState([]);
-  const [incompatibleVegetables, setIncompatibleVegetables] = useState([]);
+  const { compatibleVegetables, setCompatibleVegetables } = useContext(CompatibleContext);
+  const { incompatibleVegetables, setIncompatibleVegetables } = useContext(IncompatibleContext);
 
   function getVegetable(id) {
     const vegetableToName = vegetablesList.find((vegetable) => vegetable.id === id);
@@ -23,7 +25,6 @@ const MainVegetableGarden = ({ vegetablesList }) => {
 
   useEffect(() => {
     if (selectedCase.length !== 0) {
-
       // pour chaque id => le légume => parcourir les amis et enemis
       const allCompatible = [];
       const allUncompatible = [];
@@ -43,17 +44,20 @@ const MainVegetableGarden = ({ vegetablesList }) => {
           compatible.splice(index, 1);
         }
       });
-
-
       // change l'état des légumes compatibles triés (callback pour les nombres)
       setCompatibleVegetables(compatible.sort(function (a, b) { return a - b; }));
       setIncompatibleVegetables(uncompatible.sort(function (a, b) { return a - b; }));
+      navigate('/vegetables-list');
     }
   }, [selectedCase]);
 
   const handleSelectCell = (id) => {
     const column = id % columns;
     const row = Math.floor(id / columns);
+
+    // context idgarden
+    setIndexGarden(id);
+
     switch (true) {
       case column === 0 && row === 0:
         //"coin haut gauche"
@@ -153,9 +157,9 @@ const MainVegetableGarden = ({ vegetablesList }) => {
     <div>
       <h1>Mon potager</h1>
       <div className="garden">
-        <DisplayCompatibility compatibleVegetables={compatibleVegetables} getVegetable={getVegetable} />
+        {/* <DisplayCompatibility compatibleVegetables={compatibleVegetables} getVegetable={getVegetable} /> */}
         <GardenGrid garden={garden} handleSelectCell={handleSelectCell} getVegetable={getVegetable} />
-        <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} getVegetable={getVegetable} />
+        {/* <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} getVegetable={getVegetable} /> */}
       </div>
     </div>
   );

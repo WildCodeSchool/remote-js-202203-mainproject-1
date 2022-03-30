@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-const DisplayVegetablesList = ({ vegetablesList, handleModal }) => {
+
+const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handleAddToGarden }) => {
+
   /***** pagination*/
   const [page, setPage] = useState(1);
   const [vegetablesPaged, setVegetablesPaged] = useState([]);
@@ -47,16 +49,19 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal }) => {
             </div>
             <div className="sowing-ground">
               <span>
-                Semis en extérieur de {vegetable.startingSowingGround} à
+                Semis en extérieur de {vegetable.startingSowingGround} à {''}
                 {vegetable.endingSowingGround}
               </span>
             </div>
             <div className="harvest">
               <span>
-                Récolte de {vegetable.startingHarvest} à
+                Récolte de {vegetable.startingHarvest} à {''}
                 {vegetable.endingHarvest}
               </span>
             </div>
+            {(indexGarden !== -1) ? (
+            <button onClick = {() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
+            ) : ""}
             <div className="nav-details">
               <li onClick={() => handleModal(vegetable.id)}>Détails</li>
             </div>

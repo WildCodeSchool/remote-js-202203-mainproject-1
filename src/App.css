@@ -254,6 +254,9 @@ div[id="garden"] {
 div[id="garden"] div.cell {
   height:290px;
 width:290px;
+display:flex;
+justify-content: center;
+align-items: center;
 margin-top:20px;
 border:1px black solid;
 }
@@ -261,17 +264,23 @@ div[id="garden"] div.cell button:hover {
   cursor: pointer;
 }
 
+div[id="vegetables-list"] {
+  display:flex;
+}
+
 div[id="compatible-vegetable"] {
   background-color: green;
   padding:10px;
   text-align:left;
   color:#fff;
+  width:400px;
 }
 div[id="incompatible-vegetable"] {
-  background-color: red;
+  background-color: #cf1d1d;
   padding:10px;
   text-align:left;
   color:#fff;
+  width:400px;
 }
 
 ul {

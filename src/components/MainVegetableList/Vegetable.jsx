@@ -1,8 +1,7 @@
 import { RiCloseLine } from "react-icons/ri";
 import aubergine from "../../media/aubergine.jpg";
 
-const Vegetable = ({ handleModal, vegetable, limitsList }) => {
-  console.log(limitsList);
+const Vegetable = ({ handleModal, vegetable, limitsList, indexGarden, handleAddToGarden }) => {
   return (
     <>
       <div className="darkBG" onClick={() => handleModal} />
@@ -20,7 +19,9 @@ const Vegetable = ({ handleModal, vegetable, limitsList }) => {
               className="card-picture"
               alt="card picture"
             ></img>
-
+            {(indexGarden !== -1) ? (
+            <button onClick = {() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
+            ) : ""}
             <div className="sowing-cover">
               <span>
                 Semis en intérieur de {vegetable.startingSowingCover} à{" "}
