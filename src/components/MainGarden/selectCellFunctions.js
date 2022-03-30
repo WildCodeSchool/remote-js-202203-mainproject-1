@@ -1,4 +1,4 @@
-import { columns } from "./MainVegetableGarden";
+import { columns } from "../../App";
 
 export const boxLeft = (id) => { return id - 1; };
 export const boxRight = (id) => { return id + 1; };
