@@ -20,7 +20,7 @@ const Vegetable = ({ handleModal, vegetable, limitsList, indexGarden, handleAddT
               alt="card picture"
             ></img>
             {(indexGarden !== -1) ? (
-            <button onClick = {() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
+            <button className="pointer" onClick = {() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
             ) : ""}
             <div className="sowing-cover">
               <span>

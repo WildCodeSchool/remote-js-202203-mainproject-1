@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
-const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handleAddToGarden }) => {
+const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden, handleAddToGarden }) => {
 
   /***** pagination*/
   const [page, setPage] = useState(1);
@@ -12,7 +12,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handle
   const pagingButtons = Array(numberOfPages)
     .fill(0)
     .map((el, index) => (
-      <button
+      <button className="pointer"
         disabled={page === index + 1}
         key={index}
         onClick={() => handlePage(index + 1)}
@@ -20,6 +20,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handle
         {index + 1}
       </button>
     ));
+
 
   function handlePage(value) {
     setPage(value);
@@ -31,7 +32,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handle
     // indice de fin, le dernier élément n'est pas pris en compte
     const lastMarker = page * vegetablesPerPage;
     setVegetablesPaged(vegetablesList.slice(firstMarker, lastMarker));
-  }, [page,vegetablesList]);
+  }, [page, vegetablesList]);
 
   return (
     <div>
@@ -60,7 +61,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handle
               </span>
             </div>
             {(indexGarden !== -1) ? (
-            <button onClick = {() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
+              <button className="pointer" onClick={() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
             ) : ""}
             <div className="nav-details">
               <li onClick={() => handleModal(vegetable.id)}>Détails</li>
@@ -68,17 +69,19 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden,handle
           </div>
         ))}
       </ul>
-      {page !== 1 ? (
-        <button onClick={() => handlePage(page - 1)}>Précédent</button>
-      ) : (
-        ""
-      )}
-      {pagingButtons}
-      {page !== numberOfPages ? (
-        <button onClick={() => handlePage(page + 1)}>Suivant</button>
-      ) : (
-        ""
-      )}
+      <nav id="paging">
+        {page !== 1 ? (
+          <button className="btn-paging pointer" onClick={() => handlePage(page - 1)}>précédent</button>
+        ) : (
+          <span className="btn-empty"></span>
+        )}
+        {vegetablesList.length > 10 ? pagingButtons : ""}
+        {page !== numberOfPages ? (
+          <button className="btn-paging pointer" onClick={() => handlePage(page + 1)}>suivant</button>
+        ) : (
+          <span className="btn-empty"></span>
+        )}
+      </nav>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 /***************** index.html ***********************/
-
+html * {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
   display: flex;
@@ -11,6 +13,10 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.pointer:hover {
+  cursor :pointer;
 }
 
 /***************** Home ***********************/
@@ -133,6 +139,10 @@ footer li {
   justify-content: center;
 }
 
+.card-vegetable h3 {
+  font-size: 18px;
+}
+
 /******* Vegetable ***********/
 .darkBG {
   background-color: rgba(0, 0, 0, 0.75);
@@ -241,27 +251,29 @@ footer li {
 
 
 /***************** garden ***********************/
-.garden{
-  display:flex;
-  justify-content:space-around;
-}
+
 div[id="garden"] {
-  width:1200px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-around;
+  max-width:1600px;
+  margin:0 auto;
+  padding:20px;
+  display:grid;
+  gap:5px;
+  background-color: rgb(240, 237, 234);
 }
 div[id="garden"] div.cell {
-  height:290px;
-width:290px;
+height:290px;
 display:flex;
 justify-content: center;
 align-items: center;
-margin-top:20px;
-border:1px black solid;
+margin:5px;
+border:1px dashed black;
+font-size:28px;
+font-weight:600;
 }
-div[id="garden"] div.cell button:hover {
-  cursor: pointer;
+
+div[id="garden"] div.cell.active {
+  background-color: #dde8dd;
+  border:1px solid #96a696;
 }
 
 div[id="vegetables-list"] {
@@ -285,4 +297,30 @@ div[id="incompatible-vegetable"] {
 
 ul {
   list-style-type: none;
+}
+
+nav[id="paging"] {
+  margin:20px auto;
+}
+
+nav[id="paging"] button {
+background-color: transparent;
+border:0;
+font-size:18px;
+color:#4557ff;
+font-style:italic;
+margin:0 6px;
+}
+nav[id="paging"] button:disabled {
+  font-weight:600;
+  font-style:normal;
+  color:#000;
+}
+nav[id="paging"] button:disabled:hover {
+  cursor:default;
+}
+
+nav[id="paging"] button.btn-paging, nav[id="paging"] span.btn-empty {
+  display:inline-block;
+  width:100px;
 }

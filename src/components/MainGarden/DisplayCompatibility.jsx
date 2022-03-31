@@ -1,12 +1,12 @@
 
 
-const DisplayCompatibility = ({compatibleVegetables, getVegetable}) => {
+const DisplayCompatibility = ({compatibleVegetables}) => {
     return (
         <div id="compatible-vegetable">
-            <h3>Légumes conseillés</h3>
+            <h3>Associations conseillées</h3>
             <ul>
-            {compatibleVegetables.map(vegetableId => 
-               <li key={vegetableId}>{getVegetable(vegetableId)}</li> )}
+            {compatibleVegetables.map((vegetableName,index) => 
+               <li key={index}>{vegetableName}</li> )}
             </ul>
         </div>
     );
