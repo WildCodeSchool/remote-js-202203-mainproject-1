@@ -6,6 +6,7 @@ import Footer from "./components/LayoutApp/Footer";
 import Home from "./components/LayoutApp/Home";
 import MainVegetableGarden from "./components/MainGarden/MainVegetableGarden";
 import MainVegetables from "./components/MainVegetableList/MainVegetables";
+import MainCrud from "./components/MainCrud/MainCrud";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -13,6 +14,9 @@ import GardenContext from "./components/Context/GardenContext";
 import IndexGardenContext from "./components/Context/IndexGardenContext";
 import CompatibleContext from "./components/Context/CompatibleContext";
 import IncompatibleContext from "./components/Context/IncompatibleContext";
+import Create from "./components/MainCrud/Create";
+import Update from "./components/MainCrud/Update";
+import Delete from "./components/MainCrud/Delete";
 
 export const columns = 4;
 export const rows = 4;
@@ -45,10 +49,27 @@ function App() {
             <Route
               path="/vegetables-list"
               element={
-                <GardenContext.Provider value={{ garden: garden, setGarden: setGarden }}>
-                  <IndexGardenContext.Provider value={{ indexGarden: indexGarden, setIndexGarden: setIndexGarden }}>
-                  <CompatibleContext.Provider value={{ compatibleVegetables: compatibleVegetables, setCompatibleVegetables: setCompatibleVegetables }}>
-                  <IncompatibleContext.Provider value={{ incompatibleVegetables: incompatibleVegetables, setIncompatibleVegetables: setIncompatibleVegetables }}>
+                <GardenContext.Provider
+                  value={{ garden: garden, setGarden: setGarden }}
+                >
+                  <IndexGardenContext.Provider
+                    value={{
+                      indexGarden: indexGarden,
+                      setIndexGarden: setIndexGarden,
+                    }}
+                  >
+                    <CompatibleContext.Provider
+                      value={{
+                        compatibleVegetables: compatibleVegetables,
+                        setCompatibleVegetables: setCompatibleVegetables,
+                      }}
+                    >
+                      <IncompatibleContext.Provider
+                        value={{
+                          incompatibleVegetables: incompatibleVegetables,
+                          setIncompatibleVegetables: setIncompatibleVegetables,
+                        }}
+                      >
                         <MainVegetables vegetablesList={vegetablesList} />
                       </IncompatibleContext.Provider>
                     </CompatibleContext.Provider>
@@ -66,6 +87,10 @@ function App() {
                   </CompatibleContext.Provider>
                 </IndexGardenContext.Provider>
               </GardenContext.Provider>} />
+              <Route path="/vegetable-option" element={<MainCrud />} />
+              <Route path="/vegetable-option-create" element={<Create />} />
+              <Route path="/vegetable-option-update" element={<Update />} />
+              <Route path="/vegetable-option-delete" element={<Delete />} />
           </Routes>
         </div>
       </Router>
