@@ -8,6 +8,8 @@ import CompatibleContext from "../../components/Context/CompatibleContext";
 import IncompatibleContext from "../../components/Context/IncompatibleContext";
 import DisplayCompatibility from "../MainGarden/DisplayCompatibility";
 import DisplayIncompatibility from "../MainGarden/DisplayIncompatibility";
+import Search from './Search';
+  
 
 const MainVegetables = ({ vegetablesList }) => {
   let navigate = useNavigate();
@@ -16,6 +18,20 @@ const MainVegetables = ({ vegetablesList }) => {
   const {compatibleVegetables} = useContext(CompatibleContext);
   const {incompatibleVegetables} = useContext(IncompatibleContext);
   
+  //Search
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState(vegetablesList);
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
+  useEffect(() => {
+    console.log(searchTerm);
+    const results = vegetablesList.filter(vegetable => vegetable.name.toLowerCase().includes(searchTerm));
+    setSearchResults(results);
+    console.log(results);
+  }, [searchTerm,vegetablesList]);
+  
+
 
   /***** state frame-details*/
   const [openModal, setOpenModal] = useState(false);
@@ -48,6 +64,7 @@ const MainVegetables = ({ vegetablesList }) => {
 
   return (
     <div id="vegetables-list">
+
       {compatibleVegetables.length !==0 ? <DisplayCompatibility compatibleVegetables={compatibleVegetables} getVegetable={getVegetable} /> : ""}
       {incompatibleVegetables.length !==0 ? <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} getVegetable={getVegetable} /> : ""}
       
@@ -65,12 +82,21 @@ const MainVegetables = ({ vegetablesList }) => {
           }
         </div>
       ) : null}
+      <Search handleSearch={handleSearch} />
+      {searchResults.length !== 0 ?
+        <DisplayVegetablesList
+          vegetablesList={searchResults}
+          handleModal={handleModal}
+          indexGarden={indexGarden}
+          handleAddToGarden={handleAddToGarden} /> 
+      :
       <DisplayVegetablesList
-        vegetablesList={vegetablesList}
+       vegetablesList = { vegetablesList } 
         handleModal={handleModal}
         indexGarden={indexGarden}
         handleAddToGarden={handleAddToGarden}
       />
+      }
     </div>
   );
 };

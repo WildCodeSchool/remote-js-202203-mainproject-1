@@ -1,11 +1,16 @@
-const Search = () => {
+
+
+
+const Search = ( {searchTerm, handleSearch} ) => {
+  
   return (
-    <div>
-      <h2>Recherche d'un légume</h2>
+    <div className="search">
+      <label>Recherche</label>
       <input
-        value={searchValue}
         type="text"
-        placeholder="Recherchez un légume en particulier"
+        placeholder="Recherchez un légume"
+        onChange={(event) => { handleSearch(event.target.value);}}
+        
       />
     </div>
   );
