@@ -10,13 +10,16 @@ function Header() {
       <nav className="nav">
         <ul>
           <li>
-            <Link to={'/'} className="link" activeClassName="active" exact>Accueil</Link>
+            <Link to={'/'} >Accueil</Link>
           </li>
           <li>
-            <Link to={'/vegetables-list'} className="link" activeClassName="active" exact>Liste des légumes</Link>
+            <Link to={'/vegetables-list'}>Mes légumes</Link>
           </li>
           <li>
-            <Link to={'/vegetable-garden'} className="link" activeClassName="active" exact>Mon potager</Link>
+            <Link to={'/vegetable-option'}>Options</Link>
+          </li>
+          <li>
+            <Link to={'/vegetable-garden'}>Mon potager</Link>
           </li>
         </ul>
       </nav>

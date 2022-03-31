@@ -44,7 +44,7 @@ const DisplayVegetablesList = ({ vegetablesList, handleModal, indexGarden, handl
             <h2>{vegetable.name}</h2>
             <div className="sowing-cover">
               <span>
-                Semis en intérieur de {vegetable.startingSowingCover} à
+                Semis en intérieur de {vegetable.startingSowingCover} à {''}
                 {vegetable.endingSowingCover}
               </span>
             </div>

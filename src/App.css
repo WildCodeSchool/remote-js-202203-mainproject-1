@@ -324,3 +324,18 @@ nav[id="paging"] button.btn-paging, nav[id="paging"] span.btn-empty {
   display:inline-block;
   width:100px;
 }
+/** form-Crud **/
+
+.form-create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu-crud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
