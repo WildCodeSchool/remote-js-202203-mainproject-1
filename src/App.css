@@ -16,7 +16,7 @@ html * {
 }
 
 .pointer:hover {
-  cursor :pointer;
+  cursor: pointer;
 }
 
 /***************** Home ***********************/
@@ -62,7 +62,7 @@ header li {
   list-style-type: none;
   background: linear-gradient(
     to bottom right,
-    rgb(12, 61, 12),
+    rgb(62, 175, 62),
     rgb(40, 141, 40)
   );
   color: #bbb;
@@ -115,7 +115,18 @@ footer li {
   margin: 10px;
   padding: 20px;
 }
-
+.card-vegetable button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background: linear-gradient(
+    to bottom right,
+    rgb(12, 61, 12),
+    rgb(40, 141, 40)
+  );
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
+}
 .container-card {
   display: flex;
   flex-wrap: wrap;
@@ -138,7 +149,6 @@ footer li {
   display: flex;
   justify-content: center;
 }
-
 .card-vegetable h3 {
   font-size: 18px;
 }
@@ -171,7 +181,7 @@ footer li {
   color: white;
   z-index: 10;
   border-radius: 16px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 5px 20px 0 rgba(100, 100, 100, 1);
 }
 
 .modalHeader {
@@ -249,80 +259,134 @@ footer li {
   border-radius: 10px;
 }
 
-
 /***************** garden ***********************/
 
 div[id="garden"] {
-  max-width:1600px;
-  margin:0 auto;
-  padding:20px;
-  display:grid;
-  gap:5px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  gap: 5px;
   background-color: rgb(240, 237, 234);
 }
 div[id="garden"] div.cell {
-height:290px;
-display:flex;
-justify-content: center;
-align-items: center;
-margin:5px;
-border:1px dashed black;
-font-size:28px;
-font-weight:600;
+  height: 290px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  border: 1px dashed black;
+  font-size: 28px;
+  font-weight: 600;
 }
 
 div[id="garden"] div.cell.active {
   background-color: #dde8dd;
-  border:1px solid #96a696;
+  border: 1px solid #96a696;
+}
+.planted-parcell {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+div[id="garden"] button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
+div[id="garden"] button:hover {
+  transform: scale(1.1);
+  transition: all 0.25s ease-in-out;
+}
+
+div[id="garden"] button[id="add-vegetable"],
+button[id="change-vegetable"] {
+  background: linear-gradient(
+    to bottom right,
+    rgb(12, 61, 12),
+    rgb(40, 141, 40)
+  );
+}
+div[id="garden"] button[id="delete-vegetable"] {
+  background: linear-gradient(
+    to bottom right,
+    rgb(175, 167, 62),
+    rgb(123, 129, 36)
+  );
+}
+
+.planted-parcell button {
+  margin-top: 30px;
+}
 div[id="vegetables-list"] {
-  display:flex;
+  display: flex;
+  flex-direction: column;
 }
-
+div[id="compatibilities"] {
+  display: flex;
+  justify-content: space-around;
+}
 div[id="compatible-vegetable"] {
   background-color: green;
-  padding:10px;
-  text-align:left;
-  color:#fff;
-  width:400px;
 }
 div[id="incompatible-vegetable"] {
   background-color: #cf1d1d;
-  padding:10px;
-  text-align:left;
-  color:#fff;
-  width:400px;
 }
-
+div[id="compatible-vegetable"],
+div[id="incompatible-vegetable"] {
+  padding: 10px;
+  text-align: left;
+  color: #fff;
+  width: 400px;
+  border-radius: 10px;
+}
 ul {
   list-style-type: none;
 }
 
 nav[id="paging"] {
-  margin:20px auto;
+  margin: 20px auto;
 }
 
 nav[id="paging"] button {
-background-color: transparent;
-border:0;
-font-size:18px;
-color:#4557ff;
-font-style:italic;
-margin:0 6px;
+  background-color: transparent;
+  border: 0;
+  font-size: 18px;
+  color: #4557ff;
+  font-style: italic;
+  margin: 0 6px;
 }
 nav[id="paging"] button:disabled {
-  font-weight:600;
-  font-style:normal;
-  color:#000;
+  font-weight: 600;
+  font-style: normal;
+  color: #000;
 }
 nav[id="paging"] button:disabled:hover {
-  cursor:default;
+  cursor: default;
 }
 
-nav[id="paging"] button.btn-paging, nav[id="paging"] span.btn-empty {
-  display:inline-block;
-  width:100px;
+nav[id="paging"] button.btn-paging,
+nav[id="paging"] span.btn-empty {
+  display: inline-block;
+  width: 100px;
+}
+/******* Search ************/
+div[id="search"] {
+  flex: 1;
+  margin: 15px auto 5px auto;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  background: #ddd;
+}
+
+div[id="search"] label {
+  margin-right: 25px;
+  font-weight: bold;
 }
 /** form-Crud **/
 
