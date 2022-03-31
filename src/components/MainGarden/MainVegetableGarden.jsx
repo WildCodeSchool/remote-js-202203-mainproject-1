@@ -12,11 +12,11 @@ const MainVegetableGarden = ({ vegetablesList }) => {
   let navigate = useNavigate();
 
   const { garden } = useContext(GardenContext);
-  const { indexGarden, setIndexGarden } = useContext(IndexGardenContext);
+  const { setIndexGarden } = useContext(IndexGardenContext);
   const [selectedCase, setSelectedCase] = useState([]);
 
-  const { compatibleVegetables, setCompatibleVegetables } = useContext(CompatibleContext);
-  const { incompatibleVegetables, setIncompatibleVegetables } = useContext(IncompatibleContext);
+  const { setCompatibleVegetables } = useContext(CompatibleContext);
+  const { setIncompatibleVegetables } = useContext(IncompatibleContext);
 
   function getVegetable(id) {
     const vegetableToName = vegetablesList.find((vegetable) => vegetable.id === id);
@@ -31,8 +31,8 @@ const MainVegetableGarden = ({ vegetablesList }) => {
       selectedCase.forEach((idVegetableSelectedCase) => {
         if (idVegetableSelectedCase !== -1) {
           const vegetableSelectedCase = vegetablesList.find(vegetableOfList => vegetableOfList.id === idVegetableSelectedCase);
-          vegetableSelectedCase.friendVegetableIds.map(friendVegetableId => allCompatible.push(friendVegetableId));
-          vegetableSelectedCase.enemyVegetableIds.map(enemyVegetableId => allUncompatible.push(enemyVegetableId));
+          vegetableSelectedCase.friendVegetableIds.map(friendVegetableId => allCompatible.push(getVegetable(friendVegetableId)));
+          vegetableSelectedCase.enemyVegetableIds.map(enemyVegetableId => allUncompatible.push(getVegetable(enemyVegetableId)));
         }
       });
       // dédoublonne les tableaux
@@ -44,9 +44,9 @@ const MainVegetableGarden = ({ vegetablesList }) => {
           compatible.splice(index, 1);
         }
       });
-      // change l'état des légumes compatibles triés (callback pour les nombres)
-      setCompatibleVegetables(compatible.sort(function (a, b) { return a - b; }));
-      setIncompatibleVegetables(uncompatible.sort(function (a, b) { return a - b; }));
+      // change l'état des légumes compatibles triés 
+      setCompatibleVegetables(compatible.sort());
+      setIncompatibleVegetables(uncompatible.sort());
       navigate('/vegetables-list');
     }
   }, [selectedCase]);
@@ -156,11 +156,7 @@ const MainVegetableGarden = ({ vegetablesList }) => {
   return (
     <div>
       <h1>Mon potager</h1>
-      <div className="garden">
-        {/* <DisplayCompatibility compatibleVegetables={compatibleVegetables} getVegetable={getVegetable} /> */}
         <GardenGrid garden={garden} handleSelectCell={handleSelectCell} getVegetable={getVegetable} />
-        {/* <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} getVegetable={getVegetable} /> */}
-      </div>
     </div>
   );
 };
