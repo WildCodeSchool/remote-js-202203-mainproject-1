@@ -1,12 +1,12 @@
 
 
-const DisplayIncompatibility = ({incompatibleVegetables,getVegetable}) => {
+const DisplayIncompatibility = ({incompatibleVegetables}) => {
     return (
         <div id="incompatible-vegetable">
-            <h3>Légumes déconseillés</h3>
+            <h3>Associations déconseillées</h3>
             <ul>
-            {incompatibleVegetables.map(vegetableId => 
-               <li key={vegetableId}>{getVegetable(vegetableId)}</li> )}
+            {incompatibleVegetables.map((vegetableName,index) => 
+               <li key={index}>{vegetableName}</li> )}
         </ul>
         </div>
     );
