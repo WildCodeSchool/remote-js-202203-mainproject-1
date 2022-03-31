@@ -45,10 +45,27 @@ function App() {
             <Route
               path="/vegetables-list"
               element={
-                <GardenContext.Provider value={{ garden: garden, setGarden: setGarden }}>
-                  <IndexGardenContext.Provider value={{ indexGarden: indexGarden, setIndexGarden: setIndexGarden }}>
-                  <CompatibleContext.Provider value={{ compatibleVegetables: compatibleVegetables, setCompatibleVegetables: setCompatibleVegetables }}>
-                  <IncompatibleContext.Provider value={{ incompatibleVegetables: incompatibleVegetables, setIncompatibleVegetables: setIncompatibleVegetables }}>
+                <GardenContext.Provider
+                  value={{ garden: garden, setGarden: setGarden }}
+                >
+                  <IndexGardenContext.Provider
+                    value={{
+                      indexGarden: indexGarden,
+                      setIndexGarden: setIndexGarden,
+                    }}
+                  >
+                    <CompatibleContext.Provider
+                      value={{
+                        compatibleVegetables: compatibleVegetables,
+                        setCompatibleVegetables: setCompatibleVegetables,
+                      }}
+                    >
+                      <IncompatibleContext.Provider
+                        value={{
+                          incompatibleVegetables: incompatibleVegetables,
+                          setIncompatibleVegetables: setIncompatibleVegetables,
+                        }}
+                      >
                         <MainVegetables vegetablesList={vegetablesList} />
                       </IncompatibleContext.Provider>
                     </CompatibleContext.Provider>
@@ -56,16 +73,30 @@ function App() {
                 </GardenContext.Provider>
               }
             />
-            <Route path="/vegetable-garden" element={
-              <GardenContext.Provider value={{ garden: garden }}>
-                <IndexGardenContext.Provider value={{ setIndexGarden: setIndexGarden }}>
-                  <CompatibleContext.Provider value={{ setCompatibleVegetables: setCompatibleVegetables }}>
-                    <IncompatibleContext.Provider value={{ setIncompatibleVegetables: setIncompatibleVegetables }}>
-                      <MainVegetableGarden vegetablesList={vegetablesList} />
-                    </IncompatibleContext.Provider>
-                  </CompatibleContext.Provider>
-                </IndexGardenContext.Provider>
-              </GardenContext.Provider>} />
+            <Route
+              path="/vegetable-garden"
+              element={
+                <GardenContext.Provider value={{ garden: garden }}>
+                  <IndexGardenContext.Provider
+                    value={{ setIndexGarden: setIndexGarden }}
+                  >
+                    <CompatibleContext.Provider
+                      value={{
+                        setCompatibleVegetables: setCompatibleVegetables,
+                      }}
+                    >
+                      <IncompatibleContext.Provider
+                        value={{
+                          setIncompatibleVegetables: setIncompatibleVegetables,
+                        }}
+                      >
+                        <MainVegetableGarden vegetablesList={vegetablesList} />
+                      </IncompatibleContext.Provider>
+                    </CompatibleContext.Provider>
+                  </IndexGardenContext.Provider>
+                </GardenContext.Provider>
+              }
+            />
           </Routes>
         </div>
       </Router>
