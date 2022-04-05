@@ -1,7 +1,9 @@
 /***************** index.html ***********************/
+
 html * {
   box-sizing: border-box;
 }
+
 .App {
   text-align: center;
   display: flex;
@@ -115,6 +117,7 @@ footer li {
   margin: 10px;
   padding: 20px;
 }
+
 .card-vegetable button {
   padding: 10px;
   border-radius: 10px;
@@ -127,6 +130,7 @@ footer li {
   );
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
 }
+
 .container-card {
   display: flex;
   flex-wrap: wrap;
@@ -136,24 +140,29 @@ footer li {
 .nav-details {
   margin: 20px;
 }
+
 .nav-details li {
   list-style-type: none;
   color: blue;
 }
+
 .nav-details li:hover {
   cursor: pointer;
   color: green;
   font-weight: bold;
 }
+
 .title-list {
   display: flex;
   justify-content: center;
 }
+
 .card-vegetable h3 {
   font-size: 18px;
 }
 
 /******* Vegetable ***********/
+
 .darkBG {
   background-color: rgba(0, 0, 0, 0.75);
   width: 100vw;
@@ -244,6 +253,7 @@ footer li {
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
   transform: translate(-4px, 4px);
 }
+
 .previousBtn,
 .nextBtn {
   background: linear-gradient(
@@ -269,6 +279,7 @@ div[id="garden"] {
   gap: 5px;
   background-color: rgb(240, 237, 234);
 }
+
 div[id="garden"] div.cell {
   height: 290px;
   display: flex;
@@ -284,12 +295,14 @@ div[id="garden"] div.cell.active {
   background-color: #dde8dd;
   border: 1px solid #96a696;
 }
+
 .planted-parcell {
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
 }
+
 div[id="garden"] button {
   padding: 10px;
   border-radius: 10px;
@@ -311,6 +324,7 @@ button[id="change-vegetable"] {
     rgb(40, 141, 40)
   );
 }
+
 div[id="garden"] button[id="delete-vegetable"] {
   background: linear-gradient(
     to bottom right,
@@ -322,20 +336,25 @@ div[id="garden"] button[id="delete-vegetable"] {
 .planted-parcell button {
   margin-top: 30px;
 }
+
 div[id="vegetables-list"] {
   display: flex;
   flex-direction: column;
 }
+
 div[id="compatibilities"] {
   display: flex;
   justify-content: space-around;
 }
+
 div[id="compatible-vegetable"] {
   background-color: green;
 }
+
 div[id="incompatible-vegetable"] {
   background-color: #cf1d1d;
 }
+
 div[id="compatible-vegetable"],
 div[id="incompatible-vegetable"] {
   padding: 10px;
@@ -344,6 +363,7 @@ div[id="incompatible-vegetable"] {
   width: 400px;
   border-radius: 10px;
 }
+
 ul {
   list-style-type: none;
 }
@@ -360,11 +380,13 @@ nav[id="paging"] button {
   font-style: italic;
   margin: 0 6px;
 }
+
 nav[id="paging"] button:disabled {
   font-weight: 600;
   font-style: normal;
   color: #000;
 }
+
 nav[id="paging"] button:disabled:hover {
   cursor: default;
 }
@@ -374,7 +396,9 @@ nav[id="paging"] span.btn-empty {
   display: inline-block;
   width: 100px;
 }
+
 /******* Search ************/
+
 div[id="search"] {
   flex: 1;
   margin: 15px auto 5px auto;
@@ -388,6 +412,7 @@ div[id="search"] label {
   margin-right: 25px;
   font-weight: bold;
 }
+
 /** form-Crud **/
 
 .form-create {
@@ -402,4 +427,72 @@ div[id="search"] label {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.del-btn {
+  color: whitesmoke;
+  background-color: #cf1d1d;
+}
+
+.card-vegetable-delete {
+  border: solid;
+  width: 350px;
+  margin: 10px;
+  padding: 20px;
+}
+
+.container-card-delete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container-list-compatibilities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.list-friends {
+  border: dotted;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: normal;
+  align-items: flex-start;
+
+  color: whitesmoke;
+  background-color: green;
+
+  padding: 8px;
+  margin: 8px;
+
+  height: auto;
+  width: auto;
+}
+
+.list-enemies {
+  border: dotted;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: normal;
+  align-items: flex-start;
+
+  color: whitesmoke;
+  background-color: red;
+
+  padding: 8px;
+  margin: 8px;
+
+  height: auto;
+  width: auto;
+}
+
+.title-tab-compa {
+  display: flex;
+  justify-content: flex-start;
 }

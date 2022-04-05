@@ -1,10 +1,13 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Create from "./Create";
 import Delete from "./Delete";
 import Update from "./Update";
 
-const MainCrud = () => {
+
+const MainCrud = ({vegetablesList}) => {
+
+    
     return (
         <div className="menu-crud">
             <h1>Menu</h1>
