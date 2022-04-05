@@ -104,12 +104,30 @@ function App() {
             <Route path="/vegetable-option" element={<MainCrud />} />
             <Route
               path="/vegetable-option-create"
-              element={<Create vegetablesList={vegetablesList} />}
+              element={
+                <Create
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
             />
-            <Route path="/vegetable-option-update" element={<Update />} />
+            <Route
+              path="/vegetable-option-update"
+              element={
+                <Update
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
+            />
             <Route
               path="/vegetable-option-delete"
-              element={<Delete vegetablesList={vegetablesList} />}
+              element={
+                <Delete
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
             />
           </Routes>
         </div>

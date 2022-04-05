@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Create = ({ vegetablesList }) => {
+const Create = ({ vegetablesList, setVegetablesList }) => {
+  let navigate = useNavigate();
   const [name, setName] = useState("");
 
   const [startingSowingCover, setStartOfSowingCover] = useState("");
@@ -48,6 +50,13 @@ const Create = ({ vegetablesList }) => {
     console.log(endingHarvest);
     console.log(friendVegetableIds);
     console.log(enemyVegetableIds);
+    axios
+      .get("https://potager-compatible-api.herokuapp.com/api/vegetables")
+      .then((response) => response.data)
+      .then((data) => {
+        setVegetablesList(data);
+      });
+    navigate("/vegetables-list");
   };
 
   return (

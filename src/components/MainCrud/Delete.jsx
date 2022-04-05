@@ -1,15 +1,21 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Delete = ({ vegetablesList }) => {
+const Delete = ({ vegetablesList, setVegetablesList }) => {
+  let navigate = useNavigate();
+
   function getVegetable(id) {
-    const vegetableToName = vegetablesList.find(
-      (vegetable) => vegetable.id === id
-    );
-    alert(vegetableToName.name + "va être supprimer");
     axios.delete(
       `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`
     );
-    return typeof vegetableToName !== "undefined" ? vegetableToName.name : "";
+
+    navigate("/vegetables-list");
+    axios
+      .get("https://potager-compatible-api.herokuapp.com/api/vegetables")
+      .then((response) => response.data)
+      .then((data) => {
+        setVegetablesList(data);
+      });
   }
 
   return (
