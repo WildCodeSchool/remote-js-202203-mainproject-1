@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const Update = ({ vegetablesList, setVegetablesList }) => {
-  const [id, setID] = useState(null);
   const [name, setName] = useState("");
 
   const [startingSowingCover, setStartingSowingCover] = useState("");
@@ -95,7 +94,7 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
                 />
                 <input
                   placeholder={vegetable.endingHarvest}
-                  onChange={(e) => setEndingSowingGround(e.target.value)}
+                  onChange={(e) => setEndingHarvest(e.target.value)}
                 />
               </div>
               <button
