@@ -5,25 +5,20 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <header>
-
-      <img src={logo} className="logo" alt="logo" />
-      <nav className="nav">
-        <ul>
-          <li>
-            <Link to={'/'} >Accueil</Link>
+        <ul id="nav-main">
+          <li id="home">
+            <Link to={'/'}>Accueil</Link>
           </li>
-          <li>
+          <li id="vegetable">
             <Link to={'/vegetables-list'}>Mes légumes</Link>
           </li>
-          <li>
-            <Link to={'/vegetable-option'}>Options</Link>
-          </li>
-          <li>
+          <li id="garden">
             <Link to={'/vegetable-garden'}>Mon potager</Link>
           </li>
+          <li id="option">
+            <Link to={'/vegetable-option'}>Options</Link>
+          </li>
         </ul>
-      </nav>
-
     </header>
 
   );
