@@ -1,37 +1,77 @@
 import Vegetable from "./Vegetable";
 import DisplayVegetablesList from "./DisplayVegetablesList";
+import Paging from "./Paging";
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import IndexGardenContext from "../../components/Context/IndexGardenContext";
 import GardenContext from "../../components/Context/GardenContext";
 import CompatibleContext from "../../components/Context/CompatibleContext";
 import IncompatibleContext from "../../components/Context/IncompatibleContext";
 import DisplayCompatibility from "../MainGarden/DisplayCompatibility";
 import DisplayIncompatibility from "../MainGarden/DisplayIncompatibility";
-import Search from "./Search";
+import Search from './Search';
+
 
 const MainVegetables = ({ vegetablesList }) => {
   let navigate = useNavigate();
   const { garden } = useContext(GardenContext);
   const { indexGarden, setIndexGarden } = useContext(IndexGardenContext);
-  const { compatibleVegetables, setCompatibleVegetables } =
-    useContext(CompatibleContext);
-  const { incompatibleVegetables, setIncompatibleVegetables } =
-    useContext(IncompatibleContext);
+  const { compatibleVegetables, setCompatibleVegetables } = useContext(CompatibleContext);
+  const { incompatibleVegetables, setIncompatibleVegetables } = useContext(IncompatibleContext);
+
+  /***** pagination*/
+  const [page, setPage] = useState(1);
+  const [vegetablesPaged, setVegetablesPaged] = useState([]);
+  const [displayPaging, setDisplayPaging] = useState(true);
+  const vegetablesNumber = vegetablesList.length;
+  const vegetablesPerPage = 10;
+  const numberOfPages = Math.ceil(vegetablesNumber / vegetablesPerPage);
+  const pagingButtons = Array(numberOfPages)
+    .fill(0)
+    .map((el, index) => (
+      <button className="pointer"
+        disabled={page === index + 1}
+        key={index}
+        onClick={() => handlePage(index + 1)}
+      >
+        {index + 1}
+      </button>
+    ));
+
+
+  function handlePage(value) {
+    setPage(value);
+  }
+
+  useEffect(() => {
+    // indice de début, le premier indice est pris en compte
+    const firstMarker = (page - 1) * vegetablesPerPage;
+    // indice de fin, le dernier élément n'est pas pris en compte
+    const lastMarker = page * vegetablesPerPage;
+    setVegetablesPaged(vegetablesList.slice(firstMarker, lastMarker));
+  }, [page, vegetablesList]);
+
   //Search
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState(vegetablesList);
+  const [displayResults, setDisplayResults] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+
   const handleSearch = (value) => {
     setSearchTerm(value);
   };
+  const handleEscape = (event) => {
+    if (event.keyCode === 27) {
+      setSearchTerm("");
+    }
+  };
+
   useEffect(() => {
-    console.log(searchTerm);
-    const results = vegetablesList.filter((vegetable) =>
-      vegetable.name.toLowerCase().includes(searchTerm)
-    );
+    let results = [];
+    (searchTerm.length >= 1) ? (results = vegetablesList.filter(vegetable => vegetable.name.toLowerCase().includes(searchTerm)), setDisplayPaging(false), setDisplayResults(true)) : (setSearchResults(vegetablesPaged), setDisplayPaging(true), setDisplayResults(false));
+    // const results = vegetablesList.filter(vegetable => vegetable.name.toLowerCase().includes(searchTerm));
     setSearchResults(results);
-    console.log(results);
   }, [searchTerm, vegetablesList]);
+
 
   /***** state frame-details*/
   const [openModal, setOpenModal] = useState(false);
@@ -43,7 +83,8 @@ const MainVegetables = ({ vegetablesList }) => {
     setCompatibleVegetables([]);
     setIncompatibleVegetables([]);
     setIndexGarden(-1);
-    navigate("/vegetable-garden");
+    navigate('/vegetable-garden');
+
   };
 
   const handleModal = (vegetableId) => {
@@ -55,26 +96,16 @@ const MainVegetables = ({ vegetablesList }) => {
         ));
   };
 
+  console.log(vegetablesPaged);
+
   return (
     <div id="vegetables-list">
-      <div id="search">
-        <Search handleSearch={handleSearch} />
-      </div>
+      {(compatibleVegetables.length !== 0 || incompatibleVegetables.length !== 0) ? (
       <div id="compatibilities">
-        {compatibleVegetables.length !== 0 ? (
-          <DisplayCompatibility compatibleVegetables={compatibleVegetables} />
-        ) : (
-          ""
-        )}
-        {incompatibleVegetables.length !== 0 ? (
-          <DisplayIncompatibility
-            incompatibleVegetables={incompatibleVegetables}
-          />
-        ) : (
-          ""
-        )}
-      </div>
-
+        <h2>Nos conseils d&#39;associations de légumes pour votre potager</h2>
+        {compatibleVegetables.length !== 0 ? <DisplayCompatibility compatibleVegetables={compatibleVegetables} handleAddToGarden={handleAddToGarden} indexGarden={indexGarden} /> : null}
+        {incompatibleVegetables.length !== 0 ? <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} /> : null}
+      </div> ) : null}
       {openModal ? (
         <div>
           {
@@ -89,22 +120,34 @@ const MainVegetables = ({ vegetablesList }) => {
           }
         </div>
       ) : null}
-
-      {searchResults.length !== 0 ? (
+      <Search searchTerm={searchTerm} handleSearch={handleSearch} handleEscape={handleEscape} />
+      {/* {searchResults.length !== 0 ?
         <DisplayVegetablesList
           vegetablesList={searchResults}
           handleModal={handleModal}
           indexGarden={indexGarden}
-          handleAddToGarden={handleAddToGarden}
-        />
-      ) : (
+          handleAddToGarden={handleAddToGarden} />
+        :
         <DisplayVegetablesList
-          vegetablesList={vegetablesList}
+        vegetablesList={vegetablesPaged}
           handleModal={handleModal}
           indexGarden={indexGarden}
           handleAddToGarden={handleAddToGarden}
         />
-      )}
+      } */}
+      <DisplayVegetablesList
+        vegetablesList={vegetablesPaged}
+        searchResults={searchResults}
+        displayResults={displayResults}
+        displayPaging={displayPaging}
+        handleModal={handleModal}
+        indexGarden={indexGarden}
+        handleAddToGarden={handleAddToGarden} />
+      {displayPaging ?
+        <Paging page={page} handlePage={handlePage} vegetablesList={vegetablesList} numberOfPages={numberOfPages} pagingButtons={pagingButtons} />
+        : null
+      }
+
     </div>
   );
 };

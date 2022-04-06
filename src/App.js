@@ -36,14 +36,13 @@ function App() {
     Axios.get("https://potager-compatible-api.herokuapp.com/api/vegetables")
       .then((response) => response.data)
       .then((data) => {
-        setVegetablesList(data);
+        setVegetablesList(data.sort(function(a,b){return a.name.localeCompare(b.name); }));
       });
   }, []);
   return (
     <div className="App">
       <Router>
         <Header />
-        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -92,7 +91,6 @@ function App() {
               <Route path="/vegetable-option-update" element={<Update />} />
               <Route path="/vegetable-option-delete" element={<Delete />} />
           </Routes>
-        </div>
       </Router>
       <Footer />
     </div>
