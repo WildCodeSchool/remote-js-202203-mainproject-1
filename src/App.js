@@ -6,7 +6,6 @@ import Footer from "./components/LayoutApp/Footer";
 import Home from "./components/LayoutApp/Home";
 import MainVegetableGarden from "./components/MainGarden/MainVegetableGarden";
 import MainVegetables from "./components/MainVegetableList/MainVegetables";
-import MainCrud from "./components/MainCrud/MainCrud";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -14,9 +13,10 @@ import GardenContext from "./components/Context/GardenContext";
 import IndexGardenContext from "./components/Context/IndexGardenContext";
 import CompatibleContext from "./components/Context/CompatibleContext";
 import IncompatibleContext from "./components/Context/IncompatibleContext";
+import MainCrud from "./components/MainCrud/MainCrud";
 import Create from "./components/MainCrud/Create";
-import Update from "./components/MainCrud/Update";
 import Delete from "./components/MainCrud/Delete";
+import Update from "./components/MainCrud/Update";
 
 export const columns = 4;
 export const rows = 4;
@@ -76,20 +76,58 @@ function App() {
                 </GardenContext.Provider>
               }
             />
-            <Route path="/vegetable-garden" element={
-              <GardenContext.Provider value={{ garden: garden }}>
-                <IndexGardenContext.Provider value={{ setIndexGarden: setIndexGarden }}>
-                  <CompatibleContext.Provider value={{ setCompatibleVegetables: setCompatibleVegetables }}>
-                    <IncompatibleContext.Provider value={{ setIncompatibleVegetables: setIncompatibleVegetables }}>
-                      <MainVegetableGarden vegetablesList={vegetablesList} />
-                    </IncompatibleContext.Provider>
-                  </CompatibleContext.Provider>
-                </IndexGardenContext.Provider>
-              </GardenContext.Provider>} />
-              <Route path="/vegetable-option" element={<MainCrud />} />
-              <Route path="/vegetable-option-create" element={<Create />} />
-              <Route path="/vegetable-option-update" element={<Update />} />
-              <Route path="/vegetable-option-delete" element={<Delete />} />
+            <Route
+              path="/vegetable-garden"
+              element={
+                <GardenContext.Provider value={{ garden: garden }}>
+                  <IndexGardenContext.Provider
+                    value={{ setIndexGarden: setIndexGarden }}
+                  >
+                    <CompatibleContext.Provider
+                      value={{
+                        setCompatibleVegetables: setCompatibleVegetables,
+                      }}
+                    >
+                      <IncompatibleContext.Provider
+                        value={{
+                          setIncompatibleVegetables: setIncompatibleVegetables,
+                        }}
+                      >
+                        <MainVegetableGarden vegetablesList={vegetablesList} />
+                      </IncompatibleContext.Provider>
+                    </CompatibleContext.Provider>
+                  </IndexGardenContext.Provider>
+                </GardenContext.Provider>
+              }
+            />
+            <Route path="/vegetable-option" element={<MainCrud />} />
+            <Route
+              path="/vegetable-option-create"
+              element={
+                <Create
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
+            />
+            <Route
+              path="/vegetable-option-update"
+              element={
+                <Update
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
+            />
+            <Route
+              path="/vegetable-option-delete"
+              element={
+                <Delete
+                  vegetablesList={vegetablesList}
+                  setVegetablesList={setVegetablesList}
+                />
+              }
+            />
           </Routes>
       </Router>
       <Footer />
