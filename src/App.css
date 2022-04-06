@@ -19,9 +19,6 @@ html * {
   pointer-events: none;
 }
 
-.pointer:hover {
-  cursor: pointer;
-}
 
 /***************** Home ***********************/
 
@@ -211,6 +208,20 @@ footer li {
   border-right: 0;
   padding: 2px;
   font-size: 14px;
+}
+.pointer{
+  background-color: #ca9e52;
+  color: #fff;
+  border: 2px solid #b77503;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+.pointer:hover {
+  cursor: pointer;
+   background-color: #b77503;
 }
 
 .active {
@@ -716,13 +727,44 @@ div[id="search"] input {
   align-items: center;
   flex-direction: column;
 }
-
-.menu-crud {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+#menu-crud{
+  display:flex;
+  justify-content:space-between;
 }
+.crud-garden,.crud-vegetable{  background-color: rgb(119, 155, 66) ;
+   border-radius:25px;
+   margin:50px 50px;
+   padding:10px;
+   height:500px;}
+.crud-garden{
+  flex-grow:2;
+
+}
+.crud-vegetable{
+  flex-grow:1;
+
+}
+.vegetable-actions{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.vegetable-actions button, .crud-garden button{
+  background-color: #ca9e52;
+  color: #fff;
+  border: 2px solid #b77503;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 50px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+.vegetable-actions button :hover, 
+.crud-garden button :hover{
+  background-color: #87b587
+}
+
 
 .del-btn {
   color: whitesmoke;
@@ -790,4 +832,18 @@ div[id="search"] input {
 .title-tab-compa {
   display: flex;
   justify-content: flex-start;
+}
+
+.form-create-garden {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+
+  border: solid;
+  border-radius:50px;
+  margin:50px 300px;
+  padding:15px;
+  height: 300px;
 }

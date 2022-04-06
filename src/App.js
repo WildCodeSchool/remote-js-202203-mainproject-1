@@ -14,12 +14,14 @@ import IndexGardenContext from "./components/Context/IndexGardenContext";
 import CompatibleContext from "./components/Context/CompatibleContext";
 import IncompatibleContext from "./components/Context/IncompatibleContext";
 import MainCrud from "./components/MainCrud/MainCrud";
-import Create from "./components/MainCrud/Create";
-import Delete from "./components/MainCrud/Delete";
-import Update from "./components/MainCrud/Update";
+import CreateVegetable from "./components/MainCrud/CrudVegetable/CreateVegetable";
+import DeleteVegetable from "./components/MainCrud/CrudVegetable/DeleteVegetable";
+import UpdateVegetable from "./components/MainCrud/CrudVegetable/UpdateVegetable";
+import DeleteGarden from "./components/MainCrud/CrudGarden/DeleteGarden";
+import CreateGarden from "./components/MainCrud/CrudGarden/CreateGarden";
 
-export const columns = 4;
-export const rows = 4;
+export const columns = 3;
+export const rows =3;
 
 function App() {
   const [vegetablesList, setVegetablesList] = useState([]);
@@ -38,6 +40,8 @@ function App() {
       .then((data) => {
         setVegetablesList(data.sort(function(a,b){return a.name.localeCompare(b.name); }));
       });
+
+      // TODO récupère les garden
   }, []);
   return (
     <div className="App">
@@ -104,7 +108,7 @@ function App() {
             <Route
               path="/vegetable-option-create"
               element={
-                <Create
+                <CreateVegetable
                   vegetablesList={vegetablesList}
                   setVegetablesList={setVegetablesList}
                 />
@@ -113,7 +117,7 @@ function App() {
             <Route
               path="/vegetable-option-update"
               element={
-                <Update
+                <UpdateVegetable
                   vegetablesList={vegetablesList}
                   setVegetablesList={setVegetablesList}
                 />
@@ -122,9 +126,25 @@ function App() {
             <Route
               path="/vegetable-option-delete"
               element={
-                <Delete
+                <DeleteVegetable
                   vegetablesList={vegetablesList}
                   setVegetablesList={setVegetablesList}
+                />
+              }
+            />
+            <Route
+              path="/garden-option-create"
+              element={
+                <CreateGarden
+                  
+                />
+              }
+            />
+            <Route
+              path="/garden-option-delete"
+              element={
+                <DeleteGarden
+                  
                 />
               }
             />

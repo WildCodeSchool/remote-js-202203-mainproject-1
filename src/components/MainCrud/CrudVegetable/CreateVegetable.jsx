@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Create = ({ vegetablesList, setVegetablesList }) => {
+const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
   let navigate = useNavigate();
   const [name, setName] = useState("");
+  const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
   const [startingSowingCover, setStartOfSowingCover] = useState("");
   const [endingSowingCover, setEndOfSowingCover] = useState("");
@@ -17,6 +18,35 @@ const Create = ({ vegetablesList, setVegetablesList }) => {
 
   const [friendVegetableIds, setVegetableIds] = useState([]);
   const [enemyVegetableIds, setenemyVegetableIds] = useState([]);
+
+  const displayMonth = months.map((month, index) => (
+    <option key={index} value={month}>{month}</option>
+  ));
+  const setValueSelect = (type, value) => {
+    console.log("valuuuuuuuuuuuuuuuuuu " + value);
+    console.log(type);
+    switch (type) {
+      case 'startingSowingCover':
+        value !== "Sélectionnez un mois" ? setStartOfSowingCover(value) : setStartOfSowingCover(null);
+        break;
+      case 'endingSowingCover':
+        setEndOfSowingCover(value);
+        break;
+      case 'startingSowingGround':
+        setStartOfSowingGround(value);
+        break;
+      case 'endingSowingGround':
+        setEndOfSowingGround(value);
+        break;
+      case 'startingHarvest':
+        setstartOfHarvest(value);
+        break;
+      case 'endingHarvest':
+        setEndOfHarvest(value);
+        break;
+    }
+  };
+
 
   function setFriendsList(id) {
     friendVegetableIds.push(id);
@@ -68,37 +98,61 @@ const Create = ({ vegetablesList, setVegetablesList }) => {
         <input placeholder="Nom" onChange={(e) => setName(e.target.value)} />
 
         <label>Début : semis intérieur</label>
-        <input
+        <select onChange={(e) => setValueSelect("startingSowingCover", e.target.value)}>
+          <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="JANUARY"
           onChange={(e) => setStartOfSowingCover(e.target.value)}
-        />
+        /> */}
         <label>Fin : semis intérieur</label>
-        <input
+        <select onChange={(e) => setValueSelect("endingSowingCover", e.target.value)}>
+        <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="FEBRUARY"
           onChange={(e) => setEndOfSowingCover(e.target.value)}
-        />
+        /> */}
 
         <label>Début : semis extérieur</label>
-        <input
+        <select onChange={(e) => setValueSelect("startingSowingGround", e.target.value)}>
+        <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="JANUARY"
           onChange={(e) => setStartOfSowingGround(e.target.value)}
-        />
+        /> */}
         <label>Fin : semis extérieur</label>
-        <input
+        <select onChange={(e) => setValueSelect("endingSowingGround", e.target.value)}>
+        <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="FEBRUARY"
           onChange={(e) => setEndOfSowingGround(e.target.value)}
-        />
+        /> */}
 
         <label>Début : Récolte</label>
-        <input
+        <select onChange={(e) => setValueSelect("startingHarvest", e.target.value)}>
+        <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="FEBRUARY"
           onChange={(e) => setstartOfHarvest(e.target.value)}
-        />
+        /> */}
         <label>Fin : Récolte</label>
-        <input
+        <select onChange={(e) => setValueSelect("endingHarvest", e.target.value)}>
+        <option>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+        {/* <input
           placeholder="APRIL"
           onChange={(e) => setEndOfHarvest(e.target.value)}
-        />
+        /> */}
       </div>
       <h1></h1>
       <div className="container-list-compatibilities">
@@ -137,4 +191,4 @@ const Create = ({ vegetablesList, setVegetablesList }) => {
   );
 };
 
-export default Create;
+export default CreateVegetable;

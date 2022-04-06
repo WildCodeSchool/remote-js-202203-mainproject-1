@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const Update = ({ vegetablesList, setVegetablesList }) => {
+const UpdateVegetable = ({ vegetablesList, setVegetablesList }) => {
   const [name, setName] = useState("");
 
   const [startingSowingCover, setStartingSowingCover] = useState("");
@@ -12,6 +12,12 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
 
   const [startingHarvest, setStartingHarvest] = useState("");
   const [endingHarvest, setEndingHarvest] = useState("");
+
+  const [friendVegetableIds, setFriendVegetableIds] = useState([]);
+  const [enemyVegetableIds, setEnemyVegetableIds] = useState([]);
+
+
+
   const updateAPIData = (id) => {
     console.log(id);
     console.log(name);
@@ -21,9 +27,11 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
     console.log(endingSowingGround);
     console.log(startingHarvest);
     console.log(endingHarvest);
+    console.log(friendVegetableIds);
+    console.log(enemyVegetableIds);
 
     axios
-      .put(`https://potager-compatible-api.herokuapp.com/api/vegetables/`, {
+      .put(`https://potager-compatible-api.herokuapp.com/api/vegetables`, {
         id,
         name,
         startingSowingCover,
@@ -32,6 +40,8 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
         endingSowingGround,
         startingHarvest,
         endingHarvest,
+        friendVegetableIds,
+        enemyVegetableIds
       })
       .then()
       .catch((error) => console.log(error));
@@ -74,6 +84,14 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
                   placeholder={vegetable.endingHarvest}
                   onChange={(e) => setEndingHarvest(e.target.value)}
                 />
+                <input
+                  placeholder={vegetable.friendVegetableIds}
+                  onChange={(e) => friendVegetableIds.push(parseInt(e.target.value))}
+                />
+                <input
+                  placeholder={vegetable.enemyVegetableIds}
+                  onChange={(e) => enemyVegetableIds.push(e.target.value)}
+                />
               </div>
               <button
                 className="edit-btn"
@@ -91,4 +109,4 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
   );
 };
 
-export default Update;
+export default UpdateVegetable;
