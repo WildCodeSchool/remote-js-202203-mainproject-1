@@ -13,9 +13,18 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
   const [startingHarvest, setStartingHarvest] = useState("");
   const [endingHarvest, setEndingHarvest] = useState("");
   const updateAPIData = (id) => {
-    axios.put(
-      `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`,
-      {
+    console.log(id);
+    console.log(name);
+    console.log(startingSowingCover);
+    console.log(endingSowingCover);
+    console.log(startingSowingGround);
+    console.log(endingSowingGround);
+    console.log(startingHarvest);
+    console.log(endingHarvest);
+
+    axios
+      .put(`https://potager-compatible-api.herokuapp.com/api/vegetables/`, {
+        id,
         name,
         startingSowingCover,
         endingSowingCover,
@@ -23,8 +32,9 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
         endingSowingGround,
         startingHarvest,
         endingHarvest,
-      }
-    );
+      })
+      .then()
+      .catch((error) => console.log(error));
   };
 
   //   const setData = (data) => {

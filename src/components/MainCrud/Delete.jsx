@@ -9,13 +9,13 @@ const Delete = ({ vegetablesList, setVegetablesList }) => {
       `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`
     );
 
-    navigate("/vegetables-list");
     axios
-      .get("https://potager-compatible-api.herokuapp.com/api/vegetables")
+      .get("https://potager-compatible-api.herokuapp.com/api/vegetables/")
       .then((response) => response.data)
       .then((data) => {
         setVegetablesList(data);
       });
+    navigate("/vegetables-list");
   }
 
   return (
