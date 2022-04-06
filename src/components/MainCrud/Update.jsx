@@ -37,38 +37,6 @@ const Update = ({ vegetablesList, setVegetablesList }) => {
       .catch((error) => console.log(error));
   };
 
-  //   const setData = (data) => {
-  //     let {
-  //       id,
-  //       name,
-  //       startingSowingCover,
-  //       endingSowingCover,
-  //       startingSowingGround,
-  //       endingSowingGround,
-  //       startingHarvest,
-  //       endingHarvest,
-  //     } = data;
-  //     localStorage.setItem("ID", id);
-  //     localStorage.setItem("Name", name);
-  //     localStorage.setItem("StartingSowingCover", startingSowingCover);
-  //     localStorage.setItem("EndingSowingCover", endingSowingCover);
-  //     localStorage.setItem("StartingSowingGround", startingSowingGround);
-  //     localStorage.setItem("EndingSowingGround", endingSowingGround);
-  //     localStorage.setItem("StartingHarvest", startingHarvest);
-  //     localStorage.setItem("EndingHarvest", endingHarvest);
-  //     useEffect(() => {
-  //       setID(localStorage.getItem("ID"));
-  //       setName(localStorage.getItem("Name"));
-  //       setStartingSowingCover(localStorage.getItem("StartingSowingCover"));
-  //       setEndingSowingCover(localStorage.getItem("EndingSowingCover"));
-  //       setStartingSowingGround(localStorage.getItem("StartingSowingCover"));
-  //       setEndingSowingGround(localStorage.getItem("EndingSowingCover"));
-  //       setStartingHarvest(localStorage.getItem("StartingSowingCover"));
-  //       setEndingHarvest(localStorage.getItem("EndingSowingCover"));
-  //     }, []);
-  //     console.log(data);
-  //   };
-
   return (
     <div className="form-delete">
       <h1>Modifier un légume</h1>
