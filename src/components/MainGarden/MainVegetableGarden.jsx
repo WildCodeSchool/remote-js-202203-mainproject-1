@@ -45,24 +45,24 @@ const MainVegetableGarden = ({ vegetablesList }) => {
             (vegetableOfList) => vegetableOfList.id === idVegetableSelectedCase
           );
           vegetableSelectedCase.friendVegetableIds.map((friendVegetableId) =>
-            allCompatible.push(getVegetable(friendVegetableId))
+            allCompatible.push({name:getVegetable(friendVegetableId),id:friendVegetableId})
           );
           vegetableSelectedCase.enemyVegetableIds.map((enemyVegetableId) =>
             allUncompatible.push(getVegetable(enemyVegetableId))
           );
         }
       });
-      // dédoublonne les tableaux
-      const compatible = [...new Set(allCompatible)];
+      // dédoublonne les tableaux (dont tableau d'objets)
+      const compatible = Array.from([...new Set(allCompatible.map(JSON.stringify))]).map(JSON.parse);
       const uncompatible = [...new Set(allUncompatible)];
       // supprime les légumes incompatibles de la liste des légumes compatibles
-      compatible.forEach((idcompatible, index) => {
-        if (uncompatible.includes(idcompatible)) {
+      compatible.forEach((compatibleVegetable,index) => {
+        if (uncompatible.includes(compatibleVegetable.name)) {
           compatible.splice(index, 1);
         }
       });
       // change l'état des légumes compatibles triés
-      setCompatibleVegetables(compatible.sort());
+      setCompatibleVegetables(compatible.sort(function(a,b){return a.name.localeCompare(b.name); }));
       setIncompatibleVegetables(uncompatible.sort());
       navigate("/vegetables-list");
     }

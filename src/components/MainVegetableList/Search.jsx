@@ -1,19 +1,19 @@
 
 
 
-const Search = ( {searchTerm, handleSearch} ) => {
-  
+const Search = ({ searchTerm, handleSearch,handleEscape }) => {
   return (
-    <div className="search">
-      <label>Recherche</label>
+    <div id="search">
+      <label>Rechercher un légume</label>
       <input
+        value={searchTerm}
         type="text"
-        placeholder="Recherchez un légume"
-        onChange={(event) => { handleSearch(event.target.value);}}
-        
+        placeholder='appuyez sur la touche "Echap" pour annuler'
+        onChange={(event) => { handleSearch(event.target.value); }}
+        onKeyDown  ={(event) => {handleEscape(event);}}
       />
     </div>
   );
 };
-  
+
 export default Search;
