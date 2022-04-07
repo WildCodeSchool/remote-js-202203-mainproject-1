@@ -157,10 +157,15 @@ function App() {
             }
           />
           <Route path="/vegetable-option" element={
-            <IdGardenContext.Provider
-              value={{ idGarden: idGarden }}
-            >
-              <MainCrud GardenList={GardenList} /></IdGardenContext.Provider>
+            <ColumnsGardenContext.Provider value={{ setColumns: setColumns }}>
+              <RowsGardenContext.Provider value={{ setRows: setRows }}>
+                <GardenContext.Provider value={{ garden:garden,setGarden: setGarden }}>
+                  <IdGardenContext.Provider value={{ idGarden: idGarden, setIdGarden: setIdGarden }}>
+                    <MainCrud GardenList={GardenList} />
+                  </IdGardenContext.Provider>
+                </GardenContext.Provider>
+              </RowsGardenContext.Provider>
+            </ColumnsGardenContext.Provider>
           } />
           <Route
             path="/vegetable-option-create"

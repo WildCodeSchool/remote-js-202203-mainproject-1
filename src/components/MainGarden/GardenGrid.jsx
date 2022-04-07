@@ -5,6 +5,9 @@ const GardenGrid = ({
   handleDelete,
   columns
 }) => {
+  console.log("garden array");
+  console.log(garden);
+
   const gridColumns = {
     gridTemplateColumns: "repeat(" + columns + ",1fr)",
     maxWidth: columns * 300,
