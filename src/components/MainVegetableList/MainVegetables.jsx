@@ -1,3 +1,4 @@
+import axios from "axios";
 import Vegetable from "./Vegetable";
 import DisplayVegetablesList from "./DisplayVegetablesList";
 import Paging from "./Paging";
@@ -5,19 +6,28 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import IndexGardenContext from "../../components/Context/IndexGardenContext";
 import GardenContext from "../../components/Context/GardenContext";
+import IdGardenContext from "../../components/Context/IdGardenContext";
 import CompatibleContext from "../../components/Context/CompatibleContext";
 import IncompatibleContext from "../../components/Context/IncompatibleContext";
+import ColumnsGardenContext from "../../components/Context/ColumnsGardenContext";
+import RowsGardenContext from "../../components/Context/RowsGardenContext";
 import DisplayCompatibility from "../MainGarden/DisplayCompatibility";
 import DisplayIncompatibility from "../MainGarden/DisplayIncompatibility";
+
 import Search from './Search';
 
 
 const MainVegetables = ({ vegetablesList }) => {
   let navigate = useNavigate();
   const { garden } = useContext(GardenContext);
+  const { idGarden } = useContext(IdGardenContext);
+  const { columns } = useContext(ColumnsGardenContext);
+  const { rows } = useContext(RowsGardenContext);
   const { indexGarden, setIndexGarden } = useContext(IndexGardenContext);
   const { compatibleVegetables, setCompatibleVegetables } = useContext(CompatibleContext);
   const { incompatibleVegetables, setIncompatibleVegetables } = useContext(IncompatibleContext);
+
+
 
   /***** pagination*/
   const [page, setPage] = useState(1);
@@ -80,6 +90,15 @@ const MainVegetables = ({ vegetablesList }) => {
 
   const handleAddToGarden = (id) => {
     garden.splice(indexGarden, 1, id);
+    
+    // update API
+    axios.put("https://potager-compatible-api.herokuapp.com/api/parcels", {
+      "id": idGarden,
+      "width": columns,
+      "height": rows,
+      "vegetableIds": garden
+    });
+
     setCompatibleVegetables([]);
     setIncompatibleVegetables([]);
     setIndexGarden(-1);
@@ -101,11 +120,11 @@ const MainVegetables = ({ vegetablesList }) => {
   return (
     <div id="vegetables-list">
       {(compatibleVegetables.length !== 0 || incompatibleVegetables.length !== 0) ? (
-      <div id="compatibilities">
-        <h2>Nos conseils d&#39;associations de légumes pour votre potager</h2>
-        {compatibleVegetables.length !== 0 ? <DisplayCompatibility compatibleVegetables={compatibleVegetables} handleAddToGarden={handleAddToGarden} indexGarden={indexGarden} /> : null}
-        {incompatibleVegetables.length !== 0 ? <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} /> : null}
-      </div> ) : null}
+        <div id="compatibilities">
+          <h2>Nos conseils d&#39;associations de légumes pour votre potager</h2>
+          {compatibleVegetables.length !== 0 ? <DisplayCompatibility compatibleVegetables={compatibleVegetables} handleAddToGarden={handleAddToGarden} indexGarden={indexGarden} /> : null}
+          {incompatibleVegetables.length !== 0 ? <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} /> : null}
+        </div>) : null}
       {openModal ? (
         <div>
           {

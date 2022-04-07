@@ -2,24 +2,23 @@ import { useState } from "react";
 import axios from "axios";
 
 const CreateGarden = () => {
-    const [width, setWidth] = useState("3");
-    const [height, setHeight] = useState("3");
+    const [width, setWidth] = useState(3);
+    const [height, setHeight] = useState(3);
     //const [vegetableIds, setVegetableIds] = useState([]);
-    const initialGarden = new Array(height * width).fill(-1);
+    const vegetableids = new Array(height * width).fill(-1);
 
     function handleCreate(value) {
           
        
             axios.post("https://potager-compatible-api.herokuapp.com/api/parcels", {
-                width,
-                height,
-                initialGarden
+                "width" : width,
+                "height" : height,
+               "vegetableIds" : vegetableids
             });
-
       
         console.log("Nombre de lignes : " + width);
         console.log("Nombre de colonnes : " + height);
-        console.log(initialGarden);
+        console.log(vegetableids);
     }
 
     return(
@@ -37,7 +36,7 @@ const CreateGarden = () => {
                             <option value="5"> 5 lignes </option>
                             <option value="6"> 6 lignes </option>
                         </select>
-                        {width}
+                        
                     </div>
 
                     <div>
@@ -51,7 +50,7 @@ const CreateGarden = () => {
                             <option value="5"> 5 colonnes </option>
                             <option value="6"> 6 colonnes </option>
                         </select>
-                        {height}
+                        
                     </div>
                     <button type="submit" onClick={handleCreate}> Valider </button>
                 </div>

@@ -1,14 +1,13 @@
-import { columns } from "../../App";
-
 const GardenGrid = ({
   garden,
   handleSelectCell,
   getVegetable,
   handleDelete,
+  columns
 }) => {
   const gridColumns = {
     gridTemplateColumns: "repeat(" + columns + ",1fr)",
-    maxWidth: columns*300,
+    maxWidth: columns * 300,
   };
 
   return (
