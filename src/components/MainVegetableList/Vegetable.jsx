@@ -56,31 +56,7 @@ const Vegetable = ({ handleModal, vegetable, limitsList, indexGarden, handleAddT
               </div>
             ) : ""}
           </div>
-          <div className="modalActions">
-            <div className="actionsContainer">
-              {vegetable.id > 1 ? (
-                <button
-                  className="previousBtn"
-                  onClick={() => handleModal(vegetable.id - 1)}
-                >
-                  précédent
-                </button>
-              ) : (
-                ""
-              )}
 
-              {vegetable.id < limitsList ? (
-                <button
-                  className="nextBtn"
-                  onClick={() => handleModal(vegetable.id + 1)}
-                >
-                  suivant
-                </button>
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
         </div>
       </div>
     </>

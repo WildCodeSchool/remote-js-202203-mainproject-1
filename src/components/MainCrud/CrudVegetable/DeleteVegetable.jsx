@@ -1,21 +1,24 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Delete = ({ vegetablesList, setVegetablesList }) => {
+const DeleteVegetable = ({ vegetablesList, setVegetablesList }) => {
   let navigate = useNavigate();
 
-  function getVegetable(id) {
-    axios.delete(
-      `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`
-    );
+  async function handleDelete(id) {
+    console.log(id);
+    console.log(vegetablesList);
+    try {
+      await axios.delete(
+        `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`
 
-    axios
-      .get("https://potager-compatible-api.herokuapp.com/api/vegetables/")
-      .then((response) => response.data)
-      .then((data) => {
-        setVegetablesList(data);
-      });
-    navigate("/vegetables-list");
+      );
+    }
+    catch (error) {
+      console.log(error);
+    }
+    const newList = vegetablesList.filter(vegetable => vegetable.id !== id);
+    setVegetablesList(newList);
+
   }
 
   return (
@@ -26,9 +29,10 @@ const Delete = ({ vegetablesList, setVegetablesList }) => {
           {vegetablesList.map((vegetable) => (
             <div className="card-vegetable-delete" key={vegetable.id}>
               <h2>{vegetable.name}</h2>
+
               <button
                 className="del-btn"
-                onClick={() => getVegetable(vegetable.id)}
+                onClick={() => handleDelete(vegetable.id)}
               >
                 SUPPRIMER
               </button>
@@ -40,4 +44,4 @@ const Delete = ({ vegetablesList, setVegetablesList }) => {
   );
 };
 
-export default Delete;
+export default DeleteVegetable;
