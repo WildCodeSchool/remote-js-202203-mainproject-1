@@ -4,7 +4,6 @@ import axios from "axios";
 
 const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
   let navigate = useNavigate();
-
   const [errorField, setErrorField] = useState("");
 
   const [listFriendVegetables, setListFriendVegetables] = useState([]);
@@ -136,15 +135,6 @@ const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
     console.log(endingHarvest);
     console.log(friendVegetableIds);
     console.log(enemyVegetableIds);
-    // axios
-    //   .get("https://potager-compatible-api.herokuapp.com/api/vegetables")
-    //   .then((response) => response.data)
-    //   .then((data) => {
-    //     // supprime le légume fantôme + tri des légumes
-    //     const sortedList = data.filter(vegetable => vegetable.id !== -1).sort(function(a,b){return a.name.localeCompare(b.name); });
-    //     setVegetablesList(sortedList);
-    //   });
-    // navigate("/vegetables-list");
   };
 
   return (

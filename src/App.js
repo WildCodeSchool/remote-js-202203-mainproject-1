@@ -31,7 +31,7 @@ function App() {
   //let navigate = useNavigate();
 
   const [vegetablesList, setVegetablesList] = useState([]);
-  const [GardenList, setGardenList] = useState([]);
+  const [gardenList, setgardenList] = useState([]);
 
   const [columns, setColumns] = useState(3);
   const [rows, setRows] = useState(3);
@@ -57,7 +57,7 @@ function App() {
       .then((response) => response.data)
       .then((data) => {
         (data.length > 0) ? (
-          setGardenList(data),
+          setgardenList(data),
           // => il faut définir maintenant la colonne et la largeur rows et columns
           setIdGarden(data[data.length - 1].id),
           setGarden(data[data.length - 1].vegetableIds),
@@ -154,7 +154,7 @@ function App() {
               <RowsGardenContext.Provider value={{ setRows: setRows }}>
                 <GardenContext.Provider value={{ garden: garden, setGarden: setGarden }}>
                   <IdGardenContext.Provider value={{ idGarden: idGarden, setIdGarden: setIdGarden }}>
-                    <MainCrud GardenList={GardenList} />
+                    <MainCrud gardenList={gardenList} setgardenList={setgardenList} />
                   </IdGardenContext.Provider>
                 </GardenContext.Provider>
               </RowsGardenContext.Provider>
@@ -180,7 +180,7 @@ function App() {
           />
           <Route
             path="/garden-option-create"
-            element={<CreateGarden />}
+            element={<CreateGarden gardenList={gardenList} setgardenList={setgardenList} setIdGarden={setIdGarden} />}
           />
           <Route
             path="/garden-option-delete"
