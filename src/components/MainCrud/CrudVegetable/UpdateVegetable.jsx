@@ -54,9 +54,9 @@ const UpdateVegetable = ({ vegetablesList, setVegetablesList }) => {
     <div className="form-delete">
       <h1>Modifier un légume</h1>
       <div>
-        <ul className="container-card-delete">
+        <ul className="container-card-update">
           {vegetablesList.map((vegetable) => (
-            <div className="card-vegetable-delete" key={vegetable.id}>
+            <div className="card-vegetable-update" key={vegetable.id}>
               <div>
                 <h2>{vegetable.name}</h2>                
               </div>

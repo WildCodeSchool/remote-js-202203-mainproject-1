@@ -7,9 +7,9 @@ const DisplayVegetablesList = ({ vegetablesList,searchResults, displayResults,di
     <div className="card-vegetable" key={vegetable.id}>
       {/* <img className="card-picture" alt="card picture"></img> */}
       <h2>{vegetable.name}</h2>
-      <button className="btn-details pointer" onClick={() => handleModal(vegetable.id)}>Détails</button>
+      <button className="btn-details cursor-pointer" onClick={() => handleModal(vegetable.id)}>Détails</button>
       {(indexGarden !== -1) ? (
-        <button className="pointer btn-add-vegetable" onClick={() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
+        <button className="cursor-pointer btn-add-vegetable" onClick={() => handleAddToGarden(vegetable.id)}>Ajouter au potager</button>
       ) : null}
     </div>
   ));

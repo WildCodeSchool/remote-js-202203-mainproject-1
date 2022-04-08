@@ -16,7 +16,7 @@ function Header() {
             <Link to={'/vegetable-garden'}>Mon potager</Link>
           </li>
           <li id="option">
-            <Link to={'/vegetable-option'}>Options</Link>
+            <Link to={'/vegetable-option'}>Préférences</Link>
           </li>
         </ul>
     </header>

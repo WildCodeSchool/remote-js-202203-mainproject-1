@@ -108,21 +108,21 @@ const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
 
   const postData = () => {
     axios.post("https://potager-compatible-api.herokuapp.com/api/vegetables", {
-      "name":name,
-      "startingSowingCover":startingSowingCover,
-      "endingSowingCover":endingSowingCover,
-      "startingSowingGround":startingSowingGround,
-      "endingSowingGround":endingSowingGround,
-      "startingHarvest":startingHarvest,
-      "endingHarvest":endingHarvest,
-      "friendVegetableIds":friendVegetableIds,
-      "enemyVegetableIds":enemyVegetableIds,
+      "name": name,
+      "startingSowingCover": startingSowingCover,
+      "endingSowingCover": endingSowingCover,
+      "startingSowingGround": startingSowingGround,
+      "endingSowingGround": endingSowingGround,
+      "startingHarvest": startingHarvest,
+      "endingHarvest": endingHarvest,
+      "friendVegetableIds": friendVegetableIds,
+      "enemyVegetableIds": enemyVegetableIds,
     }).then((response) => {
       console.log(vegetablesList);
       const vegetableCreated = response.data;
       console.log(vegetableCreated);
       vegetablesList.push(vegetableCreated);
-      setVegetablesList(vegetablesList.sort(function(a,b){return a.name.localeCompare(b.name); }));
+      setVegetablesList(vegetablesList.sort(function (a, b) { return a.name.localeCompare(b.name); }));
       console.log(vegetablesList);
       navigate("/vegetable-option");
     });
@@ -151,95 +151,86 @@ const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
     <form onSubmit={(e) => checkForm(e)} className="form-create">
       <h1>Ajouter un légume</h1>
       <p className="error">{errorField}</p>
-      <label>Nom du légume</label>
-      <input placeholder="Nom" onChange={(e) => setName(e.target.value)} />
-
-      <label>Début : semis intérieur</label>
-      <select onChange={(e) => setValueSelect("startingSowingCover", e.target.value)}>
-        <option value='null'>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="JANUARY"
-          onChange={(e) => setStartOfSowingCover(e.target.value)}
-        /> */}
-      <label>Fin : semis intérieur</label>
-      <select onChange={(e) => setValueSelect("endingSowingCover", e.target.value)}>
-        <option value={null}>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="FEBRUARY"
-          onChange={(e) => setEndOfSowingCover(e.target.value)}
-        /> */}
-
-      <label>Début : semis extérieur</label>
-      <select onChange={(e) => setValueSelect("startingSowingGround", e.target.value)}>
-        <option value={null}>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="JANUARY"
-          onChange={(e) => setStartOfSowingGround(e.target.value)}
-        /> */}
-      <label>Fin : semis extérieur</label>
-      <select onChange={(e) => setValueSelect("endingSowingGround", e.target.value)}>
-        <option value={null}>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="FEBRUARY"
-          onChange={(e) => setEndOfSowingGround(e.target.value)}
-        /> */}
-
-      <label>Début : Récolte</label>
-      <select onChange={(e) => setValueSelect("startingHarvest", e.target.value)}>
-        <option value={null}>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="FEBRUARY"
-          onChange={(e) => setstartOfHarvest(e.target.value)}
-        /> */}
-      <label>Fin : Récolte</label>
-      <select onChange={(e) => setValueSelect("endingHarvest", e.target.value)}>
-        <option value={null}>Sélectionnez un mois</option>
-        {displayMonth}
-      </select>
-      {/* <input
-          placeholder="APRIL"
-          onChange={(e) => setEndOfHarvest(e.target.value)}
-        /> */}
+      <p>
+        <label>Nom du légume</label>
+        <input placeholder="Nom" onChange={(e) => setName(e.target.value)} />
+      </p>
+      <p>
+        <label>Début : semis intérieur</label>
+        <select onChange={(e) => setValueSelect("startingSowingCover", e.target.value)}>
+          <option value='null'>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
+      <p>
+        <label>Fin : semis intérieur</label>
+        <select onChange={(e) => setValueSelect("endingSowingCover", e.target.value)}>
+          <option value={null}>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
+      <p>
+        <label>Début : semis extérieur</label>
+        <select onChange={(e) => setValueSelect("startingSowingGround", e.target.value)}>
+          <option value={null}>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
+      <p>
+        <label>Fin : semis extérieur</label>
+        <select onChange={(e) => setValueSelect("endingSowingGround", e.target.value)}>
+          <option value={null}>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
+      <p>
+        <label>Début : Récolte</label>
+        <select onChange={(e) => setValueSelect("startingHarvest", e.target.value)}>
+          <option value={null}>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
+      <p>
+        <label>Fin : Récolte</label>
+        <select onChange={(e) => setValueSelect("endingHarvest", e.target.value)}>
+          <option value={null}>Sélectionnez un mois</option>
+          {displayMonth}
+        </select>
+      </p>
 
       <div className="container-list-compatibilities">
-        <div className="list-friends">
+        <div className="list-friends list-compatibilities">
+        <h2>Légumes à associations favorable</h2>
           {listFriendVegetables.map((el) => (
             <div key={el.id}>
+              <label htmlFor={`friend${el.id}`}>{el.name}</label>
               <input
                 type="checkbox"
                 id={`friend${el.id}`}
                 onClick={() => setFriendsList(el.id)}
               ></input>
-              <label htmlFor={`friend${el.id}`}>{el.name}</label>
+              
             </div>
           ))}
         </div>
 
-        <div className="list-enemies">
+        <div className="list-enemies list-compatibilities">
+          <h2>Légumes à associations défavorable</h2>
           {listEnemyVegetables.map((el) => (
             <div key={el.id}>
+              <label htmlFor={`enemy${el.id}`}>{el.name}</label>
               <input
                 type="checkbox"
                 id={`enemy${el.id}`}
                 onClick={() => setEnemiesList(el.id)}
               ></input>
-              <label htmlFor={`enemy${el.id}`}>{el.name}</label>
+              
             </div>
           ))}
         </div>
       </div>
-      <button type="submit">
-        Submit
+      <button className="cursor-pointer" type="submit">
+        Enregistrer
       </button>
     </form>
   );

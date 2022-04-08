@@ -19,10 +19,10 @@ const MainCrud = ({ vegetablesList, GardenList }) => {
     let navigate = useNavigate();
     console.log(GardenList);
     const { idGarden, setIdGarden } = useContext(IdGardenContext);
-    const { garden,setGarden } = useContext(GardenContext);
+    const { garden, setGarden } = useContext(GardenContext);
     const { setColumns } = useContext(ColumnsGardenContext);
     const { setRows } = useContext(RowsGardenContext);
-    
+
     const handleSelectGarden = (id) => {
         const newGarden = GardenList.find(garden => garden.id === id);
         setGarden(newGarden.vegetableIds);
@@ -33,37 +33,38 @@ const MainCrud = ({ vegetablesList, GardenList }) => {
     };
 
 
-return (
-    <div id="menu-crud">
-        <div className="crud-garden">
-            <h2>Menu Potager</h2>
-            <button><Link to="/garden-option-create" element={<CreateGarden />} > Ajouter un potager </Link></button>
-            {/* // lister les potagers avec si légumes liste légumes et bouton modifier => garden et bouton supprimer qui supprime !
-                // = contexte idGardenCContext */}
-            <ListGarden vegetablesList ={vegetablesList} gardenList={GardenList }/>
+    return (
+        <div id="menu-crud">
+            <div className="crud-garden">
+                <h2>Gestion des potagers</h2>
+                <button><Link to="/garden-option-create" element={<CreateGarden />} > Ajouter un potager </Link></button>
 
-            {GardenList.map(garden => (
-            <div key={garden.id}>
-                 {garden.vegetableIds.filter(id => id !== -1).length >1 ? 
-                garden.vegetableIds.filter(id => id !== -1).length + " parcelles occupées sur" :
-                (garden.vegetableIds.filter(id => id !== -1).length === 1) ? "1 parcelle occupée sur" :
-                "Aucune parcelle occupée sur"} {garden.vegetableIds.length}
-                {(garden.id !== idGarden) ? <button className="cursor" onClick={() => handleSelectGarden(garden.id)}>Sélectionner ce potager</button> : <span>Parcelle active</span>}
-                {/* <button onclick={() => handleDelete(garden.id)}>supprimer</button> */}
-                </div>))}
+                {(idGarden === -1) ? (<h2>Aucun potager enregistré</h2>) : (<h2>Liste des potagers enregistrés</h2>)}
+                {(idGarden === -1) ? (null) : (
+                    <div id="list-garden">
+                        {GardenList.map(garden => (
+                            <div className="garden" key={garden.id}>
+                                {garden.vegetableIds.filter(id => id !== -1).length > 1 ?
+                                    garden.vegetableIds.filter(id => id !== -1).length + " parcelles occupées sur les" :
+                                    (garden.vegetableIds.filter(id => id !== -1).length === 1) ? "1 parcelle occupée sur les" :
+                                        "Aucune parcelle occupée sur les"} {garden.vegetableIds.length} {(garden.vegetableIds.length > 1) ? "disponibles" : "disponible"}
+                                {(garden.id !== idGarden) ? <button className="cursor-pointer" onClick={() => handleSelectGarden(garden.id)}>Sélectionner ce potager</button> : <span>&#9733; Parcelle active &#9733;</span>}
+                                {/* <button onclick={() => handleDelete(garden.id)}>supprimer</button> */}
+                            </div>))}
+                    </div>
+                )}
 
-            {/* <button><Link to="/garden-option-delete" element={<DeleteGarden />} > Supprimer un potager </Link></button> */}
-        </div>
-        <div className="crud-vegetable">
-            <h2>Menu Légume</h2>
-            <div className="vegetable-actions">
-                <button><Link to="/vegetable-option-create" element={<CreateVegetable />} > Ajouter un nouveau légume à ma liste </Link></button>
-                <button><Link to="/vegetable-option-update" element={<UpdateVegetable />} > Modifier un légume </Link></button>
-                <button><Link to="/vegetable-option-delete" element={<DeleteVegetable />} > Supprimer un légume </Link></button>
+            </div>
+            <div className="crud-vegetable">
+                <h2>Gestion des légume</h2>
+                <div className="vegetable-actions">
+                    <button><Link to="/vegetable-option-create" element={<CreateVegetable />} > Ajouter un nouveau légume à ma liste </Link></button>
+                    <button><Link to="/vegetable-option-update" element={<UpdateVegetable />} > Modifier un légume </Link></button>
+                    <button><Link to="/vegetable-option-delete" element={<DeleteVegetable />} > Supprimer un légume </Link></button>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default MainCrud;

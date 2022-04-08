@@ -31,7 +31,7 @@ const DeleteVegetable = ({ vegetablesList, setVegetablesList }) => {
               <h2>{vegetable.name}</h2>
 
               <button
-                className="del-btn"
+                className="del-btn cursor-pointer"
                 onClick={() => handleDelete(vegetable.id)}
               >
                 SUPPRIMER

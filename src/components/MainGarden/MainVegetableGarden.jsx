@@ -41,10 +41,7 @@ const MainVegetableGarden = ({ vegetablesList }) => {
     return typeof vegetableToName !== "undefined" ? vegetableToName.name : "";
   }
 
-
-
   useEffect(() => {
-    console.log(columns);
     if (selectedCase.length !== 0) {
       // pour chaque id => le légume => parcourir les amis et enemis
       const allCompatible = [];
@@ -77,6 +74,10 @@ const MainVegetableGarden = ({ vegetablesList }) => {
       navigate("/vegetables-list");
     }
   }, [selectedCase]);
+
+  useEffect(() => {
+    (idGarden === -1) ? navigate("/vegetable-option") : null;
+  }, [idGarden]);
 
   const handleDelete = (id) => {
     garden.splice(id, 1, -1);
@@ -195,7 +196,6 @@ const MainVegetableGarden = ({ vegetablesList }) => {
 
   return (
     <div>
-      {console.log("id garden : " + idGarden)}
       <h1>Mon potager</h1>
       <GardenGrid
         garden={garden}
