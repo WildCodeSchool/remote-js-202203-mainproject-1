@@ -39,6 +39,7 @@ section#home {
 }
 
 section#home img {
+  width:80%;
   max-width: 1200px;
 }
 

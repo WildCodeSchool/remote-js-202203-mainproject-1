@@ -15,16 +15,15 @@ import UpdateVegetable from "./CrudVegetable/UpdateVegetable";
 import CreateGarden from "./CrudGarden/CreateGarden";
 import ListGarden from './CrudGarden/ListGarden';
 
-const MainCrud = ({ vegetablesList, GardenList }) => {
+const MainCrud = ({  gardenList }) => {
     let navigate = useNavigate();
-    console.log(GardenList);
     const { idGarden, setIdGarden } = useContext(IdGardenContext);
     const { garden, setGarden } = useContext(GardenContext);
     const { setColumns } = useContext(ColumnsGardenContext);
     const { setRows } = useContext(RowsGardenContext);
 
     const handleSelectGarden = (id) => {
-        const newGarden = GardenList.find(garden => garden.id === id);
+        const newGarden = gardenList.find(garden => garden.id === id);
         setGarden(newGarden.vegetableIds);
         setIdGarden(id);
         setColumns(newGarden.width);
@@ -37,12 +36,13 @@ const MainCrud = ({ vegetablesList, GardenList }) => {
         <div id="menu-crud">
             <div className="crud-garden">
                 <h2>Gestion des potagers</h2>
+                {console.log(gardenList)}
                 <button><Link to="/garden-option-create" element={<CreateGarden />} > Ajouter un potager </Link></button>
 
                 {(idGarden === -1) ? (<h2>Aucun potager enregistré</h2>) : (<h2>Liste des potagers enregistrés</h2>)}
                 {(idGarden === -1) ? (null) : (
                     <div id="list-garden">
-                        {GardenList.map(garden => (
+                        {gardenList.map(garden => (
                             <div className="garden" key={garden.id}>
                                 {garden.vegetableIds.filter(id => id !== -1).length > 1 ?
                                     garden.vegetableIds.filter(id => id !== -1).length + " parcelles occupées sur les" :

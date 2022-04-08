@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const CreateGarden = () => {
+const CreateGarden = ({gardenList,setgardenList,setIdGarden}) => {
+    
     let navigate = useNavigate();
     const [width, setWidth] = useState(null);
     const [height, setHeight] = useState(null);
@@ -18,8 +19,14 @@ const CreateGarden = () => {
                 "width": width,
                 "height": height,
                 "vegetableIds": vegetableids
+            }).then((response) => {
+                const gardenCreated = response.data;
+                gardenList.push(gardenCreated);
+                setgardenList(gardenList);
+                setIdGarden(gardenCreated.id);
+                navigate("/vegetable-option");
             });
-            navigate("/vegetable-option");
+            
         } else setError("Vous devez choisir un bombre de lignes et de colonnes");
     }
 
