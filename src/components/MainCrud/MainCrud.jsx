@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 /********* Context ************/
 import GardenContext from "../Context/GardenContext";
@@ -15,7 +16,7 @@ import UpdateVegetable from "./CrudVegetable/UpdateVegetable";
 import CreateGarden from "./CrudGarden/CreateGarden";
 import ListGarden from './CrudGarden/ListGarden';
 
-const MainCrud = ({  gardenList }) => {
+const MainCrud = ({ gardenList, setgardenList }) => {
     let navigate = useNavigate();
     const { idGarden, setIdGarden } = useContext(IdGardenContext);
     const { garden, setGarden } = useContext(GardenContext);
@@ -30,6 +31,24 @@ const MainCrud = ({  gardenList }) => {
         setRows(newGarden.height);
         navigate("/vegetable-garden");
     };
+
+    const handleDelete = (id) => {
+        console.log(id);
+        const newList = gardenList.filter(garden => garden.id !== id);
+        if (idGarden === id && newList.length > 0) setIdGarden(newList[newList.length - 1].id);
+        console.log(idGarden);
+        console.log(newList);
+        axios.delete(
+            `https://potager-compatible-api-pg.herokuapp.com/api/parcels/${id}`
+    
+          );
+        setgardenList(newList);
+    };
+    useEffect(() => {
+        console.log("longueur gardenList " + gardenList.length);
+        if (gardenList.length === 0) { setIdGarden(-1); }
+        console.log(idGarden);
+    }, [gardenList]);
 
 
     return (
@@ -49,7 +68,7 @@ const MainCrud = ({  gardenList }) => {
                                     (garden.vegetableIds.filter(id => id !== -1).length === 1) ? "1 parcelle occupée sur les" :
                                         "Aucune parcelle occupée sur les"} {garden.vegetableIds.length} {(garden.vegetableIds.length > 1) ? "disponibles" : "disponible"}
                                 {(garden.id !== idGarden) ? <button className="cursor-pointer" onClick={() => handleSelectGarden(garden.id)}>Sélectionner ce potager</button> : <span>&#9733; Parcelle active &#9733;</span>}
-                                {/* <button onclick={() => handleDelete(garden.id)}>supprimer</button> */}
+                                <button className="cursor-pointer" onClick={() => handleDelete(garden.id)}>supprimer</button>
                             </div>))}
                     </div>
                 )}
@@ -59,7 +78,7 @@ const MainCrud = ({  gardenList }) => {
                 <h2>Gestion des légume</h2>
                 <div className="vegetable-actions">
                     <button><Link to="/vegetable-option-create" element={<CreateVegetable />} > Ajouter un nouveau légume à ma liste </Link></button>
-                    <button><Link to="/vegetable-option-update" element={<UpdateVegetable />} > Modifier un légume </Link></button>
+                    {/* <button><Link to="/vegetable-option-update" element={<UpdateVegetable />} > Modifier un légume </Link></button> */}
                     <button><Link to="/vegetable-option-delete" element={<DeleteVegetable />} > Supprimer un légume </Link></button>
                 </div>
             </div>

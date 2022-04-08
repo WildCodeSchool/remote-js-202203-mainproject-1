@@ -90,7 +90,7 @@ const MainVegetables = ({ vegetablesList }) => {
     garden.splice(indexGarden, 1, id);
     
     // update API
-    axios.put("https://potager-compatible-api.herokuapp.com/api/parcels", {
+    axios.put("https://potager-compatible-api-pg.herokuapp.com/api/parcels", {
       "id": idGarden,
       "width": columns,
       "height": rows,
