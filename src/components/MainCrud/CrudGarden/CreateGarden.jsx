@@ -15,7 +15,7 @@ const CreateGarden = ({gardenList,setgardenList,setIdGarden}) => {
         console.log(height);
         if (width !== null && height !== null) {
 
-            axios.post("https://potager-compatible-api.herokuapp.com/api/parcels", {
+            axios.post("https://potager-compatible-api-pg.herokuapp.com/api/parcels", {
                 "width": width,
                 "height": height,
                 "vegetableIds": vegetableids

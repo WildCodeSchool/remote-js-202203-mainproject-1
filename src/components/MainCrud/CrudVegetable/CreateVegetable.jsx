@@ -106,7 +106,7 @@ const CreateVegetable = ({ vegetablesList, setVegetablesList }) => {
 
 
   const postData = () => {
-    axios.post("https://potager-compatible-api.herokuapp.com/api/vegetables", {
+    axios.post("https://potager-compatible-api-pg.herokuapp.com/api/vegetables", {
       "name": name,
       "startingSowingCover": startingSowingCover,
       "endingSowingCover": endingSowingCover,

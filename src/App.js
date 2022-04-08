@@ -1,6 +1,4 @@
-//import logo from './logo.svg';
 import "./App.css";
-//import { useNavigate } from "react-router-dom";
 
 import Header from "./components/LayoutApp/Header";
 import Footer from "./components/LayoutApp/Footer";
@@ -23,7 +21,6 @@ import MainCrud from "./components/MainCrud/MainCrud";
 import CreateVegetable from "./components/MainCrud/CrudVegetable/CreateVegetable";
 import DeleteVegetable from "./components/MainCrud/CrudVegetable/DeleteVegetable";
 import UpdateVegetable from "./components/MainCrud/CrudVegetable/UpdateVegetable";
-import DeleteGarden from "./components/MainCrud/CrudGarden/DeleteGarden";
 import CreateGarden from "./components/MainCrud/CrudGarden/CreateGarden";
 import ShowVegetable from "./components/MainCrud/CrudVegetable/ShowVegetable";
 
@@ -44,7 +41,7 @@ function App() {
   const [incompatibleVegetables, setIncompatibleVegetables] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://potager-compatible-api.herokuapp.com/api/vegetables")
+    Axios.get("https://potager-compatible-api-pg.herokuapp.com/api/vegetables")
       .then((response) => response.data)
       .then((data) => {
         // supprime le légume fantôme + tri des légumes
@@ -53,7 +50,7 @@ function App() {
       });
     // initialise un potager vide => -1 au cas où pas de potager dans l'api
     const initialGarden = new Array(columns * rows).fill(-1);
-    Axios.get("https://potager-compatible-api.herokuapp.com/api/parcels")
+    Axios.get("https://potager-compatible-api-pg.herokuapp.com/api/parcels")
       .then((response) => response.data)
       .then((data) => {
         (data.length > 0) ? (
@@ -180,11 +177,7 @@ function App() {
           />
           <Route
             path="/garden-option-create"
-            element={<CreateGarden gardenList={gardenList} setgardenList={setgardenList} setIdGarden={setIdGarden} />}
-          />
-          <Route
-            path="/garden-option-delete"
-            element={<DeleteGarden />}
+            element={<CreateGarden gardenList={gardenList} setgardenList={setgardenList} setIdGarden={setIdGarden} setColumns={setColumns} setRows={setRows} setGarden={setGarden} columns={columns} rows={rows} />}
           />
           <Route
             path="/vegetable-option/:idSearch"

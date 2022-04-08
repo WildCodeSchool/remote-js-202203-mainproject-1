@@ -9,7 +9,7 @@ const DeleteVegetable = ({ vegetablesList, setVegetablesList }) => {
     console.log(vegetablesList);
     try {
       await axios.delete(
-        `https://potager-compatible-api.herokuapp.com/api/vegetables/${id}`
+        `https://potager-compatible-api-pg.herokuapp.com/api/vegetables/${id}`
 
       );
     }
