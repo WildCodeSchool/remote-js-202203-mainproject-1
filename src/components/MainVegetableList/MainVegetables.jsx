@@ -16,7 +16,6 @@ import DisplayIncompatibility from "../MainGarden/DisplayIncompatibility";
 
 import Search from './Search';
 
-
 const MainVegetables = ({ vegetablesList }) => {
   let navigate = useNavigate();
   const { garden } = useContext(GardenContext);
@@ -27,7 +26,7 @@ const MainVegetables = ({ vegetablesList }) => {
   const { compatibleVegetables, setCompatibleVegetables } = useContext(CompatibleContext);
   const { incompatibleVegetables, setIncompatibleVegetables } = useContext(IncompatibleContext);
 
-
+  const [modalIsActive, setModalIsActive] = useState(false);
 
   /***** pagination*/
   const [page, setPage] = useState(1);
@@ -39,7 +38,7 @@ const MainVegetables = ({ vegetablesList }) => {
   const pagingButtons = Array(numberOfPages)
     .fill(0)
     .map((el, index) => (
-      <button className="pointer"
+      <button className="cursor-pointer"
         disabled={page === index + 1}
         key={index}
         onClick={() => handlePage(index + 1)}
@@ -86,7 +85,6 @@ const MainVegetables = ({ vegetablesList }) => {
   /***** state frame-details*/
   const [openModal, setOpenModal] = useState(false);
   const [vegetable, setVegetable] = useState([]);
-  const limitsList = vegetablesList.length;
 
   const handleAddToGarden = (id) => {
     garden.splice(indexGarden, 1, id);
@@ -106,13 +104,16 @@ const MainVegetables = ({ vegetablesList }) => {
 
   };
 
+
+  // modal détail légume 
   const handleModal = (vegetableId) => {
     vegetableId === -1
-      ? (setOpenModal(false), setVegetable([]))
+      ? (setOpenModal(false), setVegetable([]),setModalIsActive(!modalIsActive))
       : (setOpenModal(true),
         setVegetable(
           vegetablesList.find((vegetable) => vegetable.id === vegetableId)
-        ));
+        ),setModalIsActive(!modalIsActive));
+        console.log(modalIsActive);
   };
 
   console.log(vegetablesPaged);
@@ -125,35 +126,18 @@ const MainVegetables = ({ vegetablesList }) => {
           {compatibleVegetables.length !== 0 ? <DisplayCompatibility compatibleVegetables={compatibleVegetables} handleAddToGarden={handleAddToGarden} indexGarden={indexGarden} /> : null}
           {incompatibleVegetables.length !== 0 ? <DisplayIncompatibility incompatibleVegetables={incompatibleVegetables} /> : null}
         </div>) : null}
-      {openModal ? (
-        <div>
+
           {
             <Vegetable
               handleModal={handleModal}
               openModal={openModal}
               vegetable={vegetable}
-              limitsList={limitsList}
               indexGarden={indexGarden}
+              modalIsActive={modalIsActive}
               handleAddToGarden={handleAddToGarden}
             />
           }
-        </div>
-      ) : null}
       <Search searchTerm={searchTerm} handleSearch={handleSearch} handleEscape={handleEscape} />
-      {/* {searchResults.length !== 0 ?
-        <DisplayVegetablesList
-          vegetablesList={searchResults}
-          handleModal={handleModal}
-          indexGarden={indexGarden}
-          handleAddToGarden={handleAddToGarden} />
-        :
-        <DisplayVegetablesList
-        vegetablesList={vegetablesPaged}
-          handleModal={handleModal}
-          indexGarden={indexGarden}
-          handleAddToGarden={handleAddToGarden}
-        />
-      } */}
       <DisplayVegetablesList
         vegetablesList={vegetablesPaged}
         searchResults={searchResults}

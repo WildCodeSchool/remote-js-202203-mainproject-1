@@ -66,14 +66,13 @@ function App() {
         )
           : (
             //navigate("/vegetable-option")
-            setGarden(initialGarden)
+            setGarden(initialGarden),
+            setIdGarden(-1)
           );
-
       });
   }, []);
   return (
     <div className="App">
-      {console.log(idGarden)}
       <Router>
         <Header />
         <Routes>
@@ -101,13 +100,13 @@ function App() {
                         <CompatibleContext.Provider
                           value={{
                             compatibleVegetables: compatibleVegetables,
-                            setCompatibleVegetables: setCompatibleVegetables,
+                            setCompatibleVegetables: setCompatibleVegetables
                           }}
                         >
                           <IncompatibleContext.Provider
                             value={{
                               incompatibleVegetables: incompatibleVegetables,
-                              setIncompatibleVegetables: setIncompatibleVegetables,
+                              setIncompatibleVegetables: setIncompatibleVegetables
                             }}
                           >
                             <MainVegetables vegetablesList={vegetablesList} />
@@ -136,14 +135,10 @@ function App() {
                         value={{ idGarden: idGarden }}
                       >
                         <CompatibleContext.Provider
-                          value={{
-                            setCompatibleVegetables: setCompatibleVegetables,
-                          }}
+                          value={{ setCompatibleVegetables: setCompatibleVegetables, }}
                         >
                           <IncompatibleContext.Provider
-                            value={{
-                              setIncompatibleVegetables: setIncompatibleVegetables,
-                            }}
+                            value={{ setIncompatibleVegetables: setIncompatibleVegetables, }}
                           >
                             <MainVegetableGarden vegetablesList={vegetablesList} />
                           </IncompatibleContext.Provider>
@@ -152,72 +147,48 @@ function App() {
                     </IndexGardenContext.Provider>
                   </GardenContext.Provider>
                 </RowsGardenContext.Provider>
-              </ColumnsGardenContext.Provider>
-
-            }
+              </ColumnsGardenContext.Provider>}
           />
           <Route path="/vegetable-option" element={
             <ColumnsGardenContext.Provider value={{ setColumns: setColumns }}>
               <RowsGardenContext.Provider value={{ setRows: setRows }}>
-                <GardenContext.Provider value={{ garden:garden,setGarden: setGarden }}>
+                <GardenContext.Provider value={{ garden: garden, setGarden: setGarden }}>
                   <IdGardenContext.Provider value={{ idGarden: idGarden, setIdGarden: setIdGarden }}>
                     <MainCrud GardenList={GardenList} />
                   </IdGardenContext.Provider>
                 </GardenContext.Provider>
               </RowsGardenContext.Provider>
-            </ColumnsGardenContext.Provider>
-          } />
+            </ColumnsGardenContext.Provider>}
+          />
           <Route
             path="/vegetable-option-create"
-            element={
-              <CreateVegetable
-                vegetablesList={vegetablesList}
-                setVegetablesList={setVegetablesList}
-              />
-            }
+            element={<CreateVegetable
+              vegetablesList={vegetablesList}
+              setVegetablesList={setVegetablesList} />}
           />
           <Route
             path="/vegetable-option-update"
-            element={
-              <UpdateVegetable
-                vegetablesList={vegetablesList}
-                setVegetablesList={setVegetablesList}
-              />
-            }
+            element={<UpdateVegetable
+              vegetablesList={vegetablesList}
+              setVegetablesList={setVegetablesList} />}
           />
           <Route
             path="/vegetable-option-delete"
-            element={
-              <DeleteVegetable
-                vegetablesList={vegetablesList}
-                setVegetablesList={setVegetablesList}
-              />
-            }
+            element={<DeleteVegetable
+              vegetablesList={vegetablesList}
+              setVegetablesList={setVegetablesList} />}
           />
           <Route
             path="/garden-option-create"
-            element={
-              <CreateGarden
-
-              />
-            }
+            element={<CreateGarden />}
           />
           <Route
             path="/garden-option-delete"
-            element={
-              <DeleteGarden
-
-              />
-            }
+            element={<DeleteGarden />}
           />
           <Route
             path="/vegetable-option/:idSearch"
-            element={
-              <ShowVegetable
-                vegetablesList={vegetablesList}
-
-              />
-            }
+            element={<ShowVegetable vegetablesList={vegetablesList} />}
           />
         </Routes>
       </Router>
