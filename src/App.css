@@ -1,13 +1,21 @@
 /***************** index.html ***********************/
+
 html * {
   box-sizing: border-box;
 }
+
+#root {
+  min-height: 100vh;
+}
+
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  color: #405b40;
+  background-color: #d5e1c4;
 }
 
 .App-logo {
@@ -15,9 +23,10 @@ html * {
   pointer-events: none;
 }
 
-.pointer:hover {
+.cursor-pointer:hover {
   cursor: pointer;
 }
+
 
 /***************** Home ***********************/
 
@@ -30,46 +39,103 @@ section#home {
 }
 
 section#home img {
-  max-width: 600px;
+  width:80%;
+  max-width: 1200px;
 }
 
 /***************** Header ***********************/
 
 header {
-  height: 100px;
+  padding: 10px;
   background-color: rgb(119, 155, 66);
-  padding: 5px;
 }
 
 header,
 header ul,
 footer ul {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
 }
 
-.logo {
-  height: 85%;
+header ul {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
-header .nav {
-  width: 80%;
-  text-align: center;
+header ul li {
+  height: 100%;
+  margin: 5px 0;
 }
 
-header li {
+@media screen and (min-width: 800px) {
+
+  header,
+  header ul,
+  footer ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  header {
+    padding: 40px 10px;
+  }
+
+  header ul li {
+    margin: 0;
+  }
+}
+
+header ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: #ffc107;
+  font-weight: 600;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+header a:before {
+  content: "";
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+header #home a:before {
+  background-image: url(media/picto_home.svg);
+}
+
+header #option a:before {
+  background-image: url(media/picto_option.svg);
+}
+
+header #vegetable a:before {
+  background-image: url(media/picto_vegetables.svg);
+}
+
+header #garden a:before {
+  background-image: url(media/picto_garden.svg);
+}
+
+/* header li {
   list-style-type: none;
-  background: linear-gradient(
-    to bottom right,
-    rgb(62, 175, 62),
-    rgb(40, 141, 40)
-  );
+  background: linear-gradient(to bottom right,
+      rgb(62, 175, 62),
+      rgb(40, 141, 40));
   color: #bbb;
   font-weight: bold;
   margin: 5px;
   padding: 10px;
-  /*width:100px;*/
   border-radius: 10px;
 }
 
@@ -77,11 +143,7 @@ header li:hover {
   cursor: pointer;
   transform: scale(1.1);
   transition: all 0.25s ease-in-out;
-}
-
-header Link {
-  text-decoration: none;
-}
+} */
 
 /***************** footer ***********************/
 
@@ -109,96 +171,252 @@ footer li {
 
 /***************** card ***********************/
 
-.card-vegetable {
-  border: solid;
+.card-vegetable,
+.card-vegetable-delete,
+.card-vegetable-update {
+  border: 1px solid #405b40;
   width: 350px;
-  margin: 10px;
+  /* margin: 10px; */
   padding: 20px;
-}
-.card-vegetable button {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  color: #fff;
-  background: linear-gradient(
-    to bottom right,
-    rgb(12, 61, 12),
-    rgb(40, 141, 40)
-  );
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
-}
-.container-card {
+  border-radius: 4px;
+  color: #405b40;
+  background-color: #eff5ef;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.card-vegetable h2 {
+  margin-top: 10px;
+}
+
+.container-card {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-gap: 20px 30px;
   justify-content: center;
 }
 
-.nav-details {
-  margin: 20px;
+
+
+.modal-card-vegetable span {
+  display: inline-flex;
+  width: 25px;
+  height: 25px;
+  background-color: #dfdfdf;
+  border: 1px solid #b0b0b0;
+  border-right: 0;
+  padding: 2px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
 }
-.nav-details li {
-  list-style-type: none;
-  color: blue;
+
+.modal-card-vegetable span:last-child {
+  border-right: 1px solid #b0b0b0;
 }
-.nav-details li:hover {
+
+div.modal-card-vegetable>div {
+  margin-bottom: 40px;
+}
+
+div.modal-card-vegetable>div>h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.modal-card-vegetable>div>h3:before {
+  display: inline-block;
+  content: '';
+  height: 40px;
+  width: 100px;
+  margin-right: 10px;
+  background-position: center left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+div.sowing-cover>h3:before {
+  background-image: url(media/picto-semis-int.png);
+}
+
+div.sowing-ground>h3:before {
+  background-image: url(media/picto-semis-ext.png);
+}
+
+div.harvest>h3:before {
+  background-image: url(media/harvest.png);
+}
+
+
+@media screen and (min-width:600px) {
+  .modal-card-vegetable span {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    font-size: 20px;
+  }
+
+  div.modal-card-vegetable>div>h3:before {
+    height: 60px;
+    width: 140px;
+    margin-right: 40px;
+  }
+}
+
+.pointer {
+  background-color: #ca9e52;
+  color: #fff;
+  border: 2px solid #b77503;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+
+.pointer:hover {
   cursor: pointer;
-  color: green;
-  font-weight: bold;
+  background-color: #b77503;
 }
+
+.active {
+  background-color: #779b42 !important;
+  color: #fff !important;
+}
+
+.harvest span.active {
+  background-color: #ffaa4b !important;
+}
+
+.btn-details {
+  background-color: #809a80;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  padding: 6px 15px;
+  align-self: flex-end;
+  transition: color 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-details:hover {
+  background-color: #87b587;
+}
+
+.btn-add-vegetable {
+  background-color: #ca9e52;
+  color: #fff;
+  border: 2px solid #b77503;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-add-vegetable:hover {
+  background-color: #b77503;
+}
+
+.btn-add-vegetable.associated {
+  margin-left: auto;
+  background-color: transparent;
+  color: green;
+  border: 0;
+  border-radius: 4px;
+  padding: 4px;
+  margin-top: 0;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-add-vegetable.associated:hover {
+  background-color: green;
+  color: #fff;
+}
+
+.btn-details:after {
+  content: "";
+  display: inline-flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  background-image: url(media/eye.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .title-list {
   display: flex;
   justify-content: center;
 }
+
 .card-vegetable h3 {
   font-size: 18px;
 }
 
 /******* Vegetable ***********/
-.darkBG {
-  background-color: rgba(0, 0, 0, 0.75);
-  width: 100vw;
-  height: 100%;
-  z-index: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  opacity: 1;
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-.centered {
-  position: fixed;
-  width: 60%;
+.darkBG {
+  background-color: rgba(0, 0, 0, 0.85);
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease-in-out;
 }
+
+.darkBG.actived {
+  opacity: 1;
+  z-index: 1;
+}
+
 
 .modal {
-  width: 100%;
-  height: 600px;
-  background: white;
+  width: 90%;
+  height: 90%;
+  max-width: 1000px;
+  max-height: 600px;
+  background: #d5e1c4;
   color: white;
-  z-index: 10;
-  border-radius: 16px;
-  box-shadow: 0 5px 20px 0 rgba(100, 100, 100, 1);
+  z-index: 5;
+  position: relative;
+  transform: scale(0);
+  transition: all .2s ease-in-out;
 }
 
-.modalHeader {
-  height: 50px;
-  background: white;
-  overflow: hidden;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+.modal.actived {
+  transform: scale(1);
 }
+
+
 
 .heading {
-  margin: 0;
-  padding: 10px;
+  font-weight: 700;
   color: #2c3e50;
-  font-weight: 500;
-  font-size: 18px;
-  text-align: center;
+  margin-bottom: 0;
 }
 
 .modal-card-vegetable {
@@ -222,151 +440,299 @@ footer li {
 }
 
 .closeBtn {
-  cursor: pointer;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 8px;
-  border: none;
-  font-size: 18px;
-  color: #fff;
-  background: #ff3e4e;
-  transition: all 0.25s ease;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
   position: absolute;
-  right: 0;
-  top: 0;
-  align-self: flex-end;
-  margin-top: -7px;
-  margin-right: -7px;
+  top: -25px;
+  right: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 0;
+  background-color: red;
+  background-image: url(media/picto_close.svg);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.closeBtn:hover {
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-  transform: translate(-4px, 4px);
-}
-.previousBtn,
-.nextBtn {
-  background: linear-gradient(
-    to bottom right,
-    rgb(12, 61, 12),
-    rgb(40, 141, 40)
-  );
-  color: #bbb;
-  font-weight: bold;
-  margin: 5px;
-  padding: 10px;
-  width: 100px;
-  border-radius: 10px;
-}
 
 /***************** garden ***********************/
 
 div[id="garden"] {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 5px;
   display: grid;
-  gap: 5px;
-  background-color: rgb(240, 237, 234);
+  border-radius: 6px;
+  gap: 10px;
+  background-color: rgb(113, 85, 63);
 }
+
 div[id="garden"] div.cell {
-  height: 290px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px;
-  border: 1px dashed black;
-  font-size: 28px;
+  border: 2px dashed black;
+  background-color: #886c57;
+  font-size: 16px;
   font-weight: 600;
 }
 
 div[id="garden"] div.cell.active {
   background-color: #dde8dd;
-  border: 1px solid #96a696;
+  border: 0;
 }
-.planted-parcell {
+
+.cell,
+.parcell {
+  width: 100%;
+}
+
+.cell:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.planted.parcell {
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
 }
+
+.planted.parcell p {
+  margin: 0;
+}
+
 div[id="garden"] button {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 8px;
+  border-radius: 4px;
   border: none;
   color: #fff;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.4);
+  width: 90%;
+  font-size: 10px;
 }
 
-div[id="garden"] button:hover {
-  transform: scale(1.1);
-  transition: all 0.25s ease-in-out;
+div[id="garden"] button.btn-garden {
+  transition: all 0.05s ease-in-out;
 }
 
-div[id="garden"] button[id="add-vegetable"],
-button[id="change-vegetable"] {
-  background: linear-gradient(
-    to bottom right,
-    rgb(12, 61, 12),
-    rgb(40, 141, 40)
-  );
+div[id="garden"] button.btn-garden:hover {
+  font-weight: 600;
 }
+
+button#add-vegetable {
+  background-color: #87a65a;
+}
+
+button#add-vegetable:hover {
+  background-color: #9cbf68;
+  color: #405b40;
+}
+
+button#change-vegetable {
+  background-color: #607b38;
+}
+
+button#change-vegetable:hover {
+  background-color: #54702a;
+}
+
 div[id="garden"] button[id="delete-vegetable"] {
-  background: linear-gradient(
-    to bottom right,
-    rgb(175, 167, 62),
-    rgb(123, 129, 36)
-  );
+  background-color: #7b6438;
 }
 
-.planted-parcell button {
-  margin-top: 30px;
+button#delete-vegetable:hover {
+  background-color: #6c5731;
 }
+
+.planted.parcell button {
+  margin-top: 4px;
+}
+
 div[id="vegetables-list"] {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
+
 div[id="compatibilities"] {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: #ffeb3b;
+  padding: 20px 10px;
 }
-div[id="compatible-vegetable"] {
-  background-color: green;
+
+div[id="compatibilities"]>h2 {
+  width: 100%;
 }
-div[id="incompatible-vegetable"] {
-  background-color: #cf1d1d;
+
+#compatibilities>div {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100px;
 }
+
 div[id="compatible-vegetable"],
 div[id="incompatible-vegetable"] {
-  padding: 10px;
-  text-align: left;
-  color: #fff;
-  width: 400px;
+  padding: 100px 10px 10px 10px;
   border-radius: 10px;
 }
+
+div[id="compatible-vegetable"] {
+  background-image: url(media/compatible.png);
+  color: green;
+}
+
+div[id="incompatible-vegetable"] {
+  background-image: url(media/incompatible.png);
+  color: red;
+}
+
+div.associated h3 {
+  margin-top: 0;
+}
+
+div.associated {
+  width: 100%;
+}
+
+@media screen and (min-width: 700px) {
+  div[id="garden"] {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  div[id="garden"] div.cell {
+    border: 3px dashed black;
+  }
+
+  .planted.parcell button {
+    margin-top: 10px;
+  }
+
+  #compatibilities>div {
+    background-position: left top;
+    background-size: 100px;
+  }
+
+  div[id="compatible-vegetable"],
+  div[id="incompatible-vegetable"] {
+    padding: 10px 10px 10px 140px;
+    text-align: left;
+    min-height: 150px;
+  }
+
+  div[id="compatibilities"] {
+    padding: 20px 60px;
+  }
+
+  .planted.parcell p {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  div[id="garden"] button {
+    padding: 30px 10px 10px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  div[id="garden"] button.btn-garden {
+    background-position: center 10px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    height: 55px;
+  }
+
+  button#add-vegetable {
+    background-image: url(media/add.svg);
+  }
+
+  button#change-vegetable {
+    background-image: url(media/change.svg);
+  }
+
+  div[id="garden"] button[id="delete-vegetable"] {
+    background-image: url(media/delete.svg);
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  div[id="garden"] div.cell {
+    font-size: 28px;
+  }
+
+  div[id="garden"] button {
+    padding: 20px 50px 20px 30px;
+  }
+
+  #garden button.btn-garden {
+    background-position: 90% center;
+    width: 220px;
+    height: 55px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  div.associated {
+    width: 50%;
+  }
+
+  #compatibilities>div {
+    background-position: left top;
+    background-size: 140px;
+  }
+}
+
+div.associated ul {
+  list-style-type: disc;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+div.associated li {
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+}
+
+div.associated li:before {
+  content: "\25CF";
+  margin-right: 6px;
+}
+
 ul {
   list-style-type: none;
 }
 
 nav[id="paging"] {
-  margin: 20px auto;
+  margin: auto auto 20px auto;
 }
 
 nav[id="paging"] button {
   background-color: transparent;
   border: 0;
   font-size: 18px;
-  color: #4557ff;
+  color: #405b40;
   font-style: italic;
   margin: 0 6px;
 }
+
 nav[id="paging"] button:disabled {
   font-weight: 600;
   font-style: normal;
   color: #000;
 }
+
 nav[id="paging"] button:disabled:hover {
   cursor: default;
+}
+
+nav[id="paging"] button:not(:disabled):hover {
+  text-decoration: underline;
 }
 
 nav[id="paging"] button.btn-paging,
@@ -374,17 +740,297 @@ nav[id="paging"] span.btn-empty {
   display: inline-block;
   width: 100px;
 }
+
 /******* Search ************/
+
 div[id="search"] {
-  flex: 1;
-  margin: 15px auto 5px auto;
-  padding: 10px;
+  width: 100%;
+  padding: 20px 40px;
   font-weight: bold;
-  border-radius: 10px;
-  background: #ddd;
+  /* background: #ddd; */
+  display: flex;
+  align-items: center;
 }
 
 div[id="search"] label {
+  background-color: transparent;
   margin-right: 25px;
   font-weight: bold;
+}
+
+div[id="search"] input {
+  flex: 1;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 6px;
+  border: 1px solid gray;
+}
+
+/** form-Crud **/
+
+.error {
+  font-weight: 700;
+  color: #ffeb3b;
+  margin: 10px 0;
+  min-height: 25px;
+  line-height: 25px;
+}
+
+.form-create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom:40px;
+}
+
+.form-create p {
+  margin-top: 0;
+}
+
+#menu-crud {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.crud-garden,
+.crud-vegetable {
+  background-color: rgb(119, 155, 66);
+  border-radius: 10px;
+  margin: 50px 50px;
+  padding: 10px;
+}
+
+.crud-garden {
+  flex-grow: 2;
+}
+
+
+.crud-vegetable {
+  flex-grow: 1;
+
+}
+
+.vegetable-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.vegetable-actions button,
+.crud-garden button {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+
+}
+
+.vegetable-actions button,
+.form-create-garden button[type="submit"],
+.form-create button[type="submit"] {
+  margin-top: 20px;
+}
+
+@media screen and (min-width:1000px) {
+  #menu-crud {
+    flex-direction: row;
+  }
+
+  .crud-garden,
+  .crud-vegetable {
+    border-radius: 25px;
+    margin: 50px 50px;
+    padding: 20px;
+    min-height: 350px;
+    min-width: 400px;
+  }
+
+  .vegetable-actions button,
+  .form-create-garden button[type="submit"] {
+    margin-top: 30px;
+  }
+
+}
+
+.vegetable-actions button a,
+.crud-garden button a,
+.form-create-garden button[type="submit"],
+.form-create button[type="submit"] {
+  display: block;
+  background-color: #ca9e52;
+  color: #fff;
+  border: 1px solid #b77503;
+  border-radius: 6px;
+  padding: 10px;
+  width: 265px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease-in-out;
+}
+
+.vegetable-actions button a:hover,
+.crud-garden button a:hover,
+.form-create-garden button[type="submit"]:hover,
+.form-create button[type="submit"]:hover {
+  background-color: #e4b25b;
+  border: 1px solid #d18d19;
+}
+
+
+.del-btn {
+  color: whitesmoke;
+  background-color: #8b4242;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  transition: all .25s ease-in-out;
+}
+
+.del-btn:hover {
+  background-color: #cf1d1d;
+}
+
+.card-vegetable-delete,
+.card-vegetable-update {
+  margin: 10px;
+}
+
+.container-card-delete,
+.container-card-update {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container-list-compatibilities {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.container-list-compatibilities .list-compatibilities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  border: dotted;
+  padding: 8px;
+  margin: 20px auto;
+  align-content: space-around;
+  justify-content: normal;
+  align-items: flex-start;
+  color: #405b40;
+  border-radius: 8px;
+}
+
+.container-list-compatibilities .list-compatibilities h2 {
+  width: 100%
+}
+
+.list-friends {
+  background-color: #cfeccb;
+}
+
+.list-enemies {
+  background-color: #fff8f8;
+}
+
+.container-list-compatibilities .list-compatibilities input {
+  width: 45px;
+}
+
+.title-tab-compa {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-create-garden {
+  background-color: rgb(119, 155, 66);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+  margin: 50px auto;
+  padding: 15px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.form-create-garden label,
+.form-create label {
+  display: inline-block;
+  width: 200px;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.form-create-garden select,
+.form-create select,
+.form-create input {
+  border: 0;
+  border-radius: 4px;
+  line-height: 24px;
+  height: 30px;
+  width: 200px;
+  padding: 4px 10px;
+}
+
+.form-create-garden div+div {
+  margin-top: 20px;
+}
+
+
+#list-garden {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.crud-garden .garden {
+  padding: 20px;
+  background-color: #d5e1c4;
+  margin: 20px;
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px
+}
+
+.crud-garden .garden span {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: #ffc107;
+  border: 1px solid #b88d0b;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.crud-garden .garden button,
+.edit-btn {
+  background-color: #779b42;
+  color: #fff;
+  border-radius: 4px;
+  padding: 6px;
+  width: 200px;
+  margin-top: 10px;
+  align-self: center;
+  text-decoration: none;
+  transition: all .25s ease-in-out;
+}
+
+.crud-garden .garden button:hover,
+.edit-btn:hover {
+  background-color: #5b7c29;
 }
